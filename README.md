@@ -25,7 +25,7 @@ Given enough time, the following features may also be implemented:
 - User reviews / user comments / user ratings
 - Mobile compatibility
 
-# Pages
+## Pages
 The website will have the following pages:
 
 - Homepage: The homepage will provide user information, movie of the day, recommendations, and possibly highlight the latest trends and most popular - - movies, news, and articles.
