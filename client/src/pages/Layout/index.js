@@ -7,6 +7,7 @@ import {
   TeamOutlined
 } from '@ant-design/icons'
 import './index.scss'
+import SearchBar from '@/components/SearchBar'
 
 const { Header, Sider } = Layout
 
@@ -54,6 +55,7 @@ const MainLayout = () => {
           </Menu>
         </Sider>
         <Layout className="layout-content" style={{ padding: 20 }}>
+          <SearchBar />
           <Outlet />
         </Layout>
       </Layout>
