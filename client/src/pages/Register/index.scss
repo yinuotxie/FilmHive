@@ -1,0 +1,29 @@
+.signup {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: center/cover url('~@/assets/friends.jpg');
+
+  .signup-logo {
+    width: 200px;
+    height: 60px;
+    display: block;
+    margin: 0 auto 20px;
+  }
+
+  .signup-container {
+    width: 440px;
+    height: 360px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 50px rgb(0 0 0 / 10%);
+  }
+
+  .signup-checkbox-label {
+    text-align: left;
+  }
+}
