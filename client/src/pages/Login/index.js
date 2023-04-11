@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import logo from "@/assets/filmhive.png"
 import "./index.scss"
+import axios from "axios"
+
+const config = require('../../config.json')
 
 function Login () {
 
@@ -15,13 +18,20 @@ function Login () {
   const [agreementChecked, setAgreementChecked] = useState(false)
 
   function onFinish (values) {
-    // console.log(values)
-    loginStore.getToken({
-      email: values.email,
-      password: values.password
+    axios.get(`http://${config.server_host}:${config.server_port}/api/login`, {
+      params: {
+        email: values.email,
+        password: values.password,
+      },
+    }).then((response) => {
+      const token = response.data[0]
+      loginStore.setToken(token)
+      navigate('/', { replace: true })
+      message.success('Login success')
+    }).catch((error) => {
+      console.log(error)
+      message.error('Invalid email or password')
     })
-    navigate('/', { replace: true })
-    message.success('Login success')
   }
 
   const handleRegister = () => {
