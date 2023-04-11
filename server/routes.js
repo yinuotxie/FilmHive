@@ -14,7 +14,18 @@ connection.connect((err) => err && console.log(err))
 
 // routes
 
+// register
+const register = () => {
+
+}
+
+// login
+const login = () => {
+
+}
+
 // export routes
 module.exports = {
-
+  register,
+  login,
 }

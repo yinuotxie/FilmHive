@@ -3,7 +3,7 @@
   "rds_port": "3306",
   "rds_user": "filmHive",
   "rds_password": "cis5500FinalProject",
-  "rds_db": "",
+  "rds_db": "FilmHive",
   "server_host": "localhost",
   "server_port": "8080"
 }
