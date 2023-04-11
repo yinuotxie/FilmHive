@@ -7,13 +7,13 @@ const Recommendation = ({ movies }) => {
       border: '2px solid #ccc',
       borderRadius: 5,
       padding: 10,
-      width: '1130px',
+      width: '1320px',
       backgroundImage: `url(${"https://wallpapercave.com/wp/wp4009237.jpg"})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
-      <Typography.Title level={4}>You might enjoy</Typography.Title>
+      <Typography.Title level={2}>You might enjoy</Typography.Title>
       <Row gutter={12} style={{ marginTop: 16, display: 'flex', justifyContent: 'center' }}>
         {movies.map((movie) => (
           <Col span={4} key={movie.id} style={{ marginLeft: `20px` }}>

@@ -99,6 +99,25 @@ const SearchBar = () => {
       <div style={{ marginBottom: 10 }}>
         <Checkbox
           checked={searchType === "movie"}
+          onChange={() => handleSearchTypeChange(searchType === "movie" ? "" : "movie")}
+        >
+          Movie
+        </Checkbox>
+        <Checkbox
+          checked={searchType === "actor"}
+          onChange={() => handleSearchTypeChange(searchType === "actor" ? "" : "actor")}
+        >
+          Actor
+        </Checkbox>
+        <Checkbox
+          checked={searchType === "director"}
+          onChange={() => handleSearchTypeChange(searchType === "director" ? "" : "director")}
+        >
+          Director
+        </Checkbox>
+
+        {/* <Checkbox
+          checked={searchType === "movie"}
           onChange={() => handleSearchTypeChange("movie")}
         >
           Movie
@@ -114,7 +133,7 @@ const SearchBar = () => {
           onChange={() => handleSearchTypeChange("director")}
         >
           Director
-        </Checkbox>
+        </Checkbox> */}
       </div>
       <div style={{ marginBottom: 10 }}>
         {
