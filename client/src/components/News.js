@@ -11,8 +11,6 @@ const News = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get('https://newsapi.org/v2/everything?q=movies&sortBy=publishedAt&pageSize=6&apiKey=18f4fa7f2f7149c381bd96287990c8aa')
-        console.log('NEWS')
-        console.log(response.data)
         setNews(response.data.articles)
       } catch (error) {
         console.error(error)

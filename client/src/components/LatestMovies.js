@@ -15,8 +15,6 @@ const LatestMovies = () => {
             api_key: '30375875d5535c02966349450fa8d221',
           },
         })
-        console.log('latestMovies')
-        console.log(response.data)
         setLatestMovies(response.data.results)
       } catch (error) {
         console.error(error)

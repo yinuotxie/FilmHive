@@ -15,8 +15,6 @@ const UpComing = () => {
             api_key: '30375875d5535c02966349450fa8d221',
           },
         })
-        console.log('upComings')
-        console.log(response.data)
         setupComing(response.data.results)
       } catch (error) {
         console.error(error)

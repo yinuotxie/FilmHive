@@ -74,4 +74,7 @@ Apr 10
 
 Apr 11
 
-- todo: user authentication, home page crawler
+- user register (database interraction)
+- login authentication (database interraction)
+- home page crawler
+- other home page components
