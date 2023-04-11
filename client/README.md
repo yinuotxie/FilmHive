@@ -41,26 +41,37 @@ The website will have the following pages:
 
 Apr 1
 
-initialization:
-
-- scss
-- router (login & layout)
-- antd
-- craco
-- mobx
-
-page:
-
-- login page
+- initialization:
+  - scss
+  - router (login & layout)
+  - antd
+  - craco
+  - mobx
+- page:
+  - login page
 
 Apr 7
 
-log in /log out
+- log in /log out
+- navigation
+- layout:
+  - home page
+  - movie page
+  - crew page
 
-navigation
-
-layout:
+Apr 9
 
 - home page
-- movie page
-- crew page
+- components:
+  - movie of the day
+  - recommendation
+  - latest 5 movies
+
+Apr 10
+
+- login page
+- sign up page
+
+Apr 11
+
+- todo: user authentication, home page crawler
