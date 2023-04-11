@@ -1,13 +1,18 @@
 import { Card, Form, Input, Checkbox, Button, message } from "antd"
-import logo from "@/assets/filmhive.png"
-import "./index.scss"
 import { useStore } from "@/store"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import logo from "@/assets/filmhive.png"
+import "./index.scss"
 
 function Login () {
 
   const { loginStore } = useStore()
   const navigate = useNavigate()
+
+  const [emailValue, setEmailValue] = useState('')
+  const [pwdValue, setPwdValue] = useState('')
+  const [agreementChecked, setAgreementChecked] = useState(false)
 
   function onFinish (values) {
     // console.log(values)
@@ -19,13 +24,17 @@ function Login () {
     message.success('Login success')
   }
 
+  const handleRegister = () => {
+    window.location.href = '/register'
+  }
+
   // function onFinishFailed (errorInfo) {
   //   console.log(errorInfo)
   // }
 
   return (
     <div className="login">
-      <Card className="login-container">
+      <Card className="login-container" style={{ height: "430px" }}>
         <img className="login-logo" src={logo} alt="" />
         <Form
           validateTrigger={['onBlur', 'onChange']}
@@ -43,14 +52,13 @@ function Login () {
             rules={[
               {
                 type: "email",
-                // pattern: /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63})$/,
                 message: 'Wrong email format',
                 validateTrigger: 'onBlur'
               },
               { required: true, message: 'Please input your email' }
             ]}
           >
-            <Input size="large" placeholder="Your email" />
+            <Input size="large" placeholder="Your email" onChange={(e) => setEmailValue(e.target.value)} />
           </Form.Item>
           <Form.Item
             name="password"
@@ -59,21 +67,24 @@ function Login () {
               { required: true, message: 'Please input your password' }
             ]}
           >
-            <Input size="large" placeholder="Your password" />
+            <Input size="large" placeholder="Your password" onChange={(e) => setPwdValue(e.target.value)} />
           </Form.Item>
           <Form.Item>
-            <Checkbox className="login-checkbox-label">
+            <Checkbox className="login-checkbox-label" onChange={(e) => setAgreementChecked(e.target.checked)}>
               I have read and agree to the User Agreement and Privacy Terms.
             </Checkbox>
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" size="large" block>
+            <Button type="primary" htmlType="submit" size="large" block disabled={!agreementChecked || !emailValue || !pwdValue}>
               LOGIN
             </Button>
           </Form.Item>
         </Form>
+        <Button type="primary" htmlType="submit" size="large" block onClick={handleRegister}>
+          SIGN UP
+        </Button>
       </Card>
-    </div>
+    </div >
   )
 }
 
