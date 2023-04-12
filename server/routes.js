@@ -2,6 +2,7 @@ const mysql = require('mysql')
 const mysql_r = require('mysql2/promise')
 const config = require('./config.json')
 
+// database connection
 const pool = mysql_r.createPool({
   host: config.rds_host,
   user: config.rds_user,
@@ -13,6 +14,7 @@ const pool = mysql_r.createPool({
   queueLimit: 0
 })
 
+// create connection
 const connection = mysql.createConnection({
   host: config.rds_host,
   user: config.rds_user,
@@ -23,13 +25,14 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => err && console.log(err))
 
+// TODO: what is this for?
 const checkUserExists = async function (email) {
   const [rows] = await pool.query('SELECT email FROM Users WHERE email = ?', [email])
   return rows.length > 0
 }
 
-// routes
-// register
+// Route: GET /register
+// Description: Register a new user
 const register = async function (req, res) {
 
   const email = req.query.email
@@ -61,15 +64,18 @@ const register = async function (req, res) {
   }
 }
 
-// login
+// Route: GET /login
+// Description: Login a user
 const login = async function (req, res) {
 
   const email = req.query.email
-
+  const password = req.query.password
+  // TODO: check if user exists and password is correct
+  // TODO: return username if correct, 401 if not
   connection.query(`
-    SELECT *
+    SELECT username
     FROM Users
-    WHERE email = '${email}'
+    WHERE email = '${email}' AND password = '${password}
   `, (err, data) => {
     if (err || data.length === 0) {
       console.log(err)
@@ -81,6 +87,23 @@ const login = async function (req, res) {
   })
 }
 
+// Route: GET /movie/search
+// Description: Search for movies based on filters
+const search = async function (req, res) {
+  const genre = req.query.genre ?? '';
+  const year = req.query.year ?? 0;
+  const award = req.query.award ?? '';
+  const country = req.query.country ?? '';
+  const runtime = req.query.runtime ?? 0;
+  const rating = req.query.rating ?? 0;
+  const realeaseYear = req.query.realeaseYear ?? '';
+
+  let query = `
+    SELECT *
+    FROM Movies
+    WHERE 1 = 1
+  `;
+}
 
 module.exports = {
   register,
