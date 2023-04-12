@@ -8,9 +8,8 @@ app.use(cors({
   origin: '*',
 }))
 
-// API endpoints definition and their handlers in routes.js
-// example: app.get('/api/users', routes.getUsers);
-
+app.get('/api/login', routes.login)
+app.get("/api/register", routes.register)
 
 app.listen(config.server_port, () => {
   console.log(`Server running at http://${config.server_host}:${config.server_port}/`)

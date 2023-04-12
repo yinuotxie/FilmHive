@@ -10,11 +10,9 @@ import Crew from './pages/Crew'
 
 function App () {
   return (
-    // router initilization
     <BrowserRouter>
       <div className="App">
         <Routes>
-          {/* match router path and render component */}
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />}></Route>
             <Route path="/movie" element={<Movie />}></Route>

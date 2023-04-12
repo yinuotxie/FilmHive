@@ -1,6 +1,9 @@
 import MovieOfTheDay from "@/components/MovieOfTheDay"
 import Recommendation from "@/components/Recommendation"
 import NewFive from "@/components/NewFive"
+import LatestMovies from "@/components/LatestMovies"
+import UpComing from "@/components/UpComing"
+import News from "@/components/News"
 import { Row, Col } from 'antd'
 
 const movies = [
@@ -34,17 +37,28 @@ const movies = [
 
 function Home () {
   return (
-    <Row>
-      <Col flex={2}>
-        <div style={{ paddingRight: 16 }}>
-          <MovieOfTheDay />
-        </div>
-      </Col>
-      <Col flex={3}>
-        <Recommendation movies={movies} />
-        <NewFive movies={movies} />
-      </Col>
-    </Row>
+    <>
+      <Row>
+        <News />
+      </Row>
+      <Row>
+        <Col flex={2}>
+          <div style={{ paddingRight: 16 }}>
+            <MovieOfTheDay />
+          </div>
+        </Col>
+        <Col flex={3}>
+          <Recommendation movies={movies} />
+          <NewFive movies={movies} />
+        </Col>
+      </Row>
+      <Row>
+        <LatestMovies />
+      </Row>
+      <Row>
+        <UpComing />
+      </Row>
+    </>
   )
 }
 

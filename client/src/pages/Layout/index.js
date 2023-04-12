@@ -16,8 +16,6 @@ const MainLayout = () => {
   const { pathname } = useLocation()
 
   const handleLogoutConfirm = () => {
-    // Handle logout here
-    // Redirect to login page
     window.location.href = '/login'
   }
 
