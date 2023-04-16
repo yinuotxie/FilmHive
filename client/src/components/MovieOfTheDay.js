@@ -4,7 +4,7 @@ const MovieOfTheDay = ({ title, posterUrl, summary }) => {
   return (
     <div style={{ marginBottom: 10 }}>
       <Card
-        title={"Movie of the Day"}
+        title={"Worth a shot!"}
         cover={<Image src={"https://www.themoviedb.org/t/p/w500/rPdtLWNsZmAtoZl9PK7S2wE3qiS.jpg"} alt={"The Godfather"} />}
         style={{ width: 400 }}
       >

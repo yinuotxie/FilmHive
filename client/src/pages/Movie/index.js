@@ -1,11 +1,9 @@
-import MovieFilter from "@/components/MovieFilter"
-import MovieList from "@/components/MovieList"
+import MoviePage from "@/components/MoviePage"
 
 function Movie () {
   return (
     <div style={{ justifyContent: 'center' }}>
-      <MovieFilter />
-      <MovieList />
+      <MoviePage />
     </div>
   )
 }

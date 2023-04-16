@@ -58,7 +58,7 @@ const DirectorList = () => {
             key={director.id}
             hoverable
             style={{ width: 300, margin: '10px' }}
-            cover={<img alt="director poster" src={director.photo_url ? director.photo_url : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'} />}
+            cover={<img alt="director poster" src={director.photo_url ? director.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
           >
             <Meta title={director.name} />
             <br />
