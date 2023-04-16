@@ -78,3 +78,20 @@ Apr 11
 - login authentication (database interraction)
 - home page crawler
 - other home page components
+
+Apr 16
+
+- Components:
+  - Search Bar improved
+  - MovieAll
+  - ActorAll
+  - DirectorAll
+- Pages:
+  - MovieAll
+  - ActorAll
+  - DirectorAll
+  - Login improved
+- Routes:
+  - MovieAll
+  - ActorAll
+  - DirectorAll
