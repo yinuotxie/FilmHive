@@ -95,3 +95,9 @@ Apr 16
   - MovieAll
   - ActorAll
   - DirectorAll
+
+Apr 17:
+
+- filter implementation
+- click on -> movie specific
+- home search

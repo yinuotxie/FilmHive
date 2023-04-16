@@ -192,10 +192,46 @@ const allDirectors = async function (req, res) {
   }
 }
 
+// home page search
+const homeSearch = async function (req, res) {
+  const searchValue = req.query.searchValue || ''
+
+  try {
+    const [moviesResult] = await pool.query(`SELECT COUNT(*) as total FROM Movies WHERE title LIKE ?`, [`%${searchValue}%`])
+    const moviesTotal = moviesResult[0].total
+    const [moviesRows] = await pool.query(`SELECT * FROM Movies WHERE title LIKE ?`, [`%${searchValue}%`])
+
+    const [crewsResult] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE name LIKE ?`, [`%${searchValue}%`])
+    const crewsTotal = crewsResult[0].total
+    const [crewsRows] = await pool.query(`SELECT * FROM Crews WHERE name LIKE ?`, [`%${searchValue}%`])
+
+    const movies = moviesRows.map((movie) => ({
+      name: movie.title,
+      image: movie.poster,
+      type: 'movie',
+      id: movie.id,
+    }))
+    const crews = crewsRows.map((crew) => ({
+      name: crew.name,
+      image: crew.photo_url,
+      type: 'crew',
+      id: crew.id,
+    }))
+    const searchResults = [...movies, ...crews]
+
+    res.status(200).json({ searchResults: searchResults, total: moviesTotal + crewsTotal })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error retrieving data from database')
+  }
+}
+
+
 module.exports = {
   register,
   login,
   allMovies,
   allActors,
   allDirectors,
+  homeSearch,
 }

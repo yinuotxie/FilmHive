@@ -8,8 +8,8 @@ const MovieFilter = ({ onFiltersChange }) => {
   const [genre, setGenre] = useState("")
   const [country, setCountry] = useState("")
   const [runtime, setRuntime] = useState(120)
-  const [rating, setRating] = useState(8)
-  const [releaseYear, setReleaseYear] = useState(2022)
+  const [rating, setRating] = useState(6)
+  const [releaseYear, setReleaseYear] = useState(2000)
   const [awarded, setAwarded] = useState(false)
   const [rated, setRated] = useState(false)
 
@@ -361,7 +361,7 @@ const MovieFilter = ({ onFiltersChange }) => {
             min={0}
             max={10.0}
             step={0.1}
-            defaultValue={8}
+            defaultValue={6}
             onChange={handleRatingChange}
             style={{ width: 500 }}
           />
@@ -383,7 +383,7 @@ const MovieFilter = ({ onFiltersChange }) => {
             min={1903}
             max={2025}
             step={1}
-            defaultValue={2022}
+            defaultValue={2000}
             onChange={handleReleaseYearChange}
             style={{ width: 500 }}
           />

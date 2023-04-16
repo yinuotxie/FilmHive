@@ -13,6 +13,7 @@ app.get("/register", routes.register)
 app.get("/allmovies", routes.allMovies)
 app.get("/allactors", routes.allActors)
 app.get("/alldirectors", routes.allDirectors)
+app.get("/homesearch", routes.homeSearch)
 
 
 app.listen(config.server_port, () => {
