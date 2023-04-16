@@ -40,7 +40,19 @@ const DirectorList = () => {
 
   return (
     <>
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          marginBottom: 10,
+          border: '2px solid #ccc',
+          borderRadius: 5,
+          padding: 10,
+          backgroundImage: `url(${"https://wallpapercave.com/wp/wp4009237.jpg"})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.2)',
+        }}>
         {directors.map((director) => (
           <Card
             key={director.id}

@@ -16,7 +16,6 @@ const News = () => {
         console.error(error)
       }
     }
-
     fetchNews()
   }, [])
 
