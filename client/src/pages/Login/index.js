@@ -18,7 +18,7 @@ function Login () {
   const [agreementChecked, setAgreementChecked] = useState(false)
 
   function onFinish (values) {
-    axios.get(`http://${config.server_host}:${config.server_port}/api/login`, {
+    axios.get(`http://${config.server_host}:${config.server_port}/login`, {
       params: {
         email: values.email,
         password: values.password,

@@ -4,6 +4,7 @@ import NewFive from "@/components/NewFive"
 import LatestMovies from "@/components/LatestMovies"
 import UpComing from "@/components/UpComing"
 import News from "@/components/News"
+import SearchBar from "@/components/SearchBar"
 import { Row, Col } from 'antd'
 
 const movies = [
@@ -38,6 +39,7 @@ const movies = [
 function Home () {
   return (
     <>
+      <SearchBar />
       <Row>
         <News />
       </Row>

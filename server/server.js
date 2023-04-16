@@ -8,8 +8,12 @@ app.use(cors({
   origin: '*',
 }))
 
-app.get('/api/login', routes.login)
-app.get("/api/register", routes.register)
+app.get("/login", routes.login)
+app.get("/register", routes.register)
+app.get("/allmovies", routes.allMovies)
+app.get("/allactors", routes.allActors)
+app.get("/alldirectors", routes.allDirectors)
+
 
 app.listen(config.server_port, () => {
   console.log(`Server running at http://${config.server_host}:${config.server_port}/`)

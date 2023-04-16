@@ -7,7 +7,6 @@ import {
   TeamOutlined
 } from '@ant-design/icons'
 import './index.scss'
-import SearchBar from '@/components/SearchBar'
 
 const { Header, Sider } = Layout
 
@@ -47,13 +46,15 @@ const MainLayout = () => {
             <Menu.Item icon={<PlaySquareOutlined />} key="/movie">
               <Link to="/movie">Movie</Link>
             </Menu.Item>
-            <Menu.Item icon={<TeamOutlined />} key="/crew">
-              <Link to="/crew">Crew</Link>
+            <Menu.Item icon={<TeamOutlined />} key="/actor">
+              <Link to="/actor">Actor</Link>
+            </Menu.Item>
+            <Menu.Item icon={<TeamOutlined />} key="/director">
+              <Link to="/director">Director</Link>
             </Menu.Item>
           </Menu>
         </Sider>
         <Layout className="layout-content" style={{ padding: 20 }}>
-          <SearchBar />
           <Outlet />
         </Layout>
       </Layout>

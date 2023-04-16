@@ -81,8 +81,61 @@ const login = async function (req, res) {
   })
 }
 
+// all movies
+const allMovies = async function (req, res) {
+
+  const limit = parseInt(req.query.limit || 20)
+  const offset = parseInt(req.query.offset || 0)
+
+  try {
+    const [results] = await pool.query('SELECT COUNT(*) as total FROM Movies')
+    const total = results[0].total
+    const [rows] = await pool.query('SELECT * FROM Movies LIMIT ? OFFSET ?', [limit, offset])
+    res.status(200).json({ movies: rows, total: total })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error retrieving movies from database')
+  }
+}
+
+// all actors
+const allActors = async function (req, res) {
+
+  const limit = parseInt(req.query.limit || 20)
+  const offset = parseInt(req.query.offset || 0)
+
+  try {
+    const [results] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE profession LIKE '%actor%' OR profession LIKE '%actress%'`)
+    const total = results[0].total
+    const [rows] = await pool.query(`SELECT * FROM Crews WHERE profession LIKE '%actor%' OR profession LIKE '%actress%' LIMIT ? OFFSET ?`, [limit, offset])
+    res.status(200).json({ actors: rows, total: total })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error retrieving actors from database')
+  }
+}
+
+// all directors
+const allDirectors = async function (req, res) {
+
+  const limit = parseInt(req.query.limit || 20)
+  const offset = parseInt(req.query.offset || 0)
+
+  try {
+    const [results] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE profession LIKE '%director%'`)
+    const total = results[0].total
+    const [rows] = await pool.query(`SELECT * FROM Crews WHERE profession LIKE '%director%' LIMIT ? OFFSET ?`, [limit, offset])
+    res.status(200).json({ directors: rows, total: total })
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('Error retrieving actors from database')
+  }
+}
 
 module.exports = {
   register,
   login,
+  allMovies,
+  allActors,
+  allDirectors,
 }
