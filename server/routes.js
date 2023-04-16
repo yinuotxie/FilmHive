@@ -86,11 +86,71 @@ const allMovies = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
   const offset = parseInt(req.query.offset || 0)
+  // const genre = req.query.genre || ''
+  const country = req.query.country || ''
+  const runtime = parseInt(req.query.runtime || 0)
+  const rating = parseFloat(req.query.rating || 0)
+  const releaseYear = parseInt(req.query.releaseYear || 0)
+  // const awarded = req.query.awarded === 'true'
+  const rated = req.query.rated === 'true'
 
   try {
-    const [results] = await pool.query('SELECT COUNT(*) as total FROM Movies')
+    // total numbers of target movies
+    let query_total = 'SELECT COUNT(*) as total FROM Movies'
+    let queryParams_total = []
+
+    // target movies
+    let query_movies = 'SELECT * FROM Movies'
+    let queryParams_movies = []
+
+    if (country || runtime || rating || releaseYear || rated) {
+
+      query_total = 'SELECT COUNT(*) as total FROM Movies WHERE '
+      query_movies = 'SELECT * FROM Movies WHERE '
+      let conditions = []
+
+      // if (genre) {
+      //   conditions.push(`genre LIKE ?`)
+      //   queryParams_total.push(`%${genre}%`)
+      //   queryParams_movies.push(`%${genre}%`)
+      // }
+      if (country) {
+        conditions.push(`country LIKE ?`)
+        queryParams_total.push(`%${country}%`)
+        queryParams_movies.push(`%${country}%`)
+      }
+      if (runtime) {
+        conditions.push(`runtimeMinutes <= ?`)
+        queryParams_total.push(runtime)
+        queryParams_movies.push(runtime)
+      }
+      if (rating) {
+        conditions.push(`imdb_rating >= ?`)
+        queryParams_total.push(rating)
+        queryParams_movies.push(rating)
+      }
+      if (releaseYear) {
+        conditions.push(`release_year >= ?`)
+        queryParams_total.push(releaseYear)
+        queryParams_movies.push(releaseYear)
+      }
+      // if (awarded) {
+      //   conditions.push(`awards IS NOT NULL`)
+      // }
+      if (rated) {
+        conditions.push(`rated IS NOT NULL AND rated != 'Unrated' AND rated != 'Not rated'`)
+      }
+      query_total += conditions.join(' AND ')
+      query_movies += conditions.join(' AND ')
+    }
+
+    query_movies += ' LIMIT ? OFFSET ?'
+    queryParams_movies.push(limit, offset)
+
+    const [results] = await pool.query(query_total, queryParams_total)
     const total = results[0].total
-    const [rows] = await pool.query('SELECT * FROM Movies LIMIT ? OFFSET ?', [limit, offset])
+
+    const [rows] = await pool.query(query_movies, queryParams_movies)
     res.status(200).json({ movies: rows, total: total })
   } catch (err) {
     console.log(err)
