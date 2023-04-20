@@ -495,5 +495,6 @@ module.exports = {
   crewActIn,
   crewRating,
   crewDuo,
-  crewFamousCoworker
+  crewFamousCoworker,
+  wideRangeDirector
 }
