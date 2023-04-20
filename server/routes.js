@@ -226,6 +226,261 @@ const homeSearch = async function (req, res) {
   }
 }
 
+// wide range director
+const wideRangeDirector = async function (req, res) {
+
+  connection.query(`
+    SELECT c.id, c.name, c.photo_url, COUNT(DISTINCT g.id) as num_genres,
+    AVG(m.imdb_rating) as avg_rating
+    FROM Crews c
+    JOIN Direct d ON d.crew_id = c.id
+    JOIN Movies m ON m.id = d.movie_id
+    JOIN MovieGenres mg ON mg.movie_id = m.id
+    JOIN Genres g ON g.id = mg.genre_id
+    WHERE c.id IN (
+    SELECT DISTINCT d.crew_id
+    FROM Direct d
+    JOIN Movies m ON m.id = d.movie_id
+    JOIN MovieGenres mg ON mg.movie_id = m.id
+    GROUP BY d.crew_id
+    HAVING COUNT(DISTINCT mg.genre_id) > 1
+    )
+    GROUP BY c.id
+    HAVING AVG(m.imdb_rating) > 8
+    ORDER BY num_genres DESC, avg_rating DESC
+    LIMIT 10;  
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Wide Range Director Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew info
+const crewInfo = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    SELECT *
+    FROM Crews
+    WHERE id='${crew_id}'
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Crew Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew award
+const crewAward = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    SELECT O.year, O.category, O.crew_id, O.movie_id, O.is_winner, M.title
+    FROM OscarAwards O
+    JOIN Movies M on O.movie_id = M.id
+    WHERE crew_id='${crew_id}'
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Award Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew famous
+const crewFamous = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    SELECT F.crew_id, F.movie_id, M.title, M.poster
+    FROM FamousFor F
+    JOIN Movies M on F.movie_id = M.id
+    WHERE crew_id='${crew_id}'
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Famous For Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew act in
+const crewActIn = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    (SELECT A.crew_id, A.movie_id, M.release_year, M.title, A.\`character\`, M.poster
+    FROM ActIn A
+    JOIN Movies M on A.movie_id = M.id
+    WHERE crew_id='${crew_id}')
+    UNION
+    (SELECT D.crew_id, D.movie_id, M.release_year, M.title, 'Director', M.poster
+    FROM Direct D
+    JOIN Movies M on D.movie_id = M.id
+    WHERE crew_id='${crew_id}')
+    ORDER BY release_year
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Act In Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew rating
+const crewRating = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    WITH AllMovie AS (
+        (SELECT A.movie_id, M.imdb_rating
+        FROM ActIn A
+        JOIN Movies M on A.movie_id = M.id
+        WHERE crew_id='${crew_id}')
+        UNION
+        (SELECT D.movie_id, M.imdb_rating
+        FROM Direct D
+        JOIN Movies M on D.movie_id = M.id
+        WHERE crew_id='${crew_id}')
+    )
+    SELECT AVG(imdb_rating) AS Avg_Rating
+    FROM AllMovie
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Average Rating Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+
+// crew duo
+const crewDuo = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    WITH CoStar AS (
+        (SELECT AI.crew_id
+        FROM ActIn A
+        JOIN Movies M on A.movie_id = M.id
+        JOIN ActIn AI on M.id = AI.movie_id
+        WHERE A.crew_id='${crew_id}'
+        AND A.crew_id <> AI.crew_id)
+        UNION ALL
+        (SELECT DI.crew_id
+        FROM Direct D
+        JOIN Movies M on D.movie_id = M.id
+        JOIN Direct DI on M.id = DI.movie_id
+        WHERE D.crew_id='${crew_id}'
+        AND D.crew_id <> DI.crew_id)
+    ),
+    CoTime AS(
+        SELECT crew_id, COUNT(*) AS co_time
+        FROM CoStar
+        GROUP BY crew_id
+    ),
+    Ordering AS (
+        SELECT c.crew_id, c.co_time,
+        SUM(CASE is_winner WHEN 1 THEN 1 ELSE 0 END) AS winning,
+        SUM(CASE is_winner WHEN 0 THEN 1 ELSE 0 END) AS nomination
+        FROM CoTime c
+        LEFT JOIN OscarAwards o
+        ON c.crew_id=o.crew_id
+        GROUP BY c.crew_id
+        ORDER BY co_time DESC, winning DESC, nomination DESC
+    )
+    SELECT Ordering.crew_id, Crews.name, Crews.photo_url, co_time, winning, nomination
+    FROM Ordering
+    JOIN Crews ON Ordering.crew_id = Crews.id
+    LIMIT 3
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Golden Duo Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
+
+// crew famous co worker
+const crewFamousCoworker = async function (req, res) {
+
+  const crew_id = req.params.crew_id
+
+  connection.query(`
+    WITH CoStar AS (
+        (SELECT AI.crew_id
+        FROM ActIn A
+        JOIN Movies M on A.movie_id = M.id
+        JOIN ActIn AI on M.id = AI.movie_id
+        WHERE A.crew_id='${crew_id}'
+        AND A.crew_id <> AI.crew_id)
+        UNION ALL
+        (SELECT DI.crew_id
+        FROM Direct D
+        JOIN Movies M on D.movie_id = M.id
+        JOIN Direct DI on M.id = DI.movie_id
+        WHERE D.crew_id='${crew_id}'
+        AND D.crew_id <> DI.crew_id)
+    ),
+    CoTime AS(
+        SELECT crew_id, COUNT(*) AS co_time
+        FROM CoStar
+        GROUP BY crew_id
+    ),
+    Ordering AS (
+        SELECT c.crew_id, c.co_time,
+        SUM(CASE is_winner WHEN 1 THEN 1 ELSE 0 END) AS winning,
+        SUM(CASE is_winner WHEN 0 THEN 1 ELSE 0 END) AS nomination
+        FROM CoTime c
+        LEFT JOIN OscarAwards o
+        ON c.crew_id=o.crew_id
+        GROUP BY c.crew_id
+        ORDER BY winning DESC, nomination DESC
+    )
+    SELECT Ordering.crew_id, Crews.name, Crews.photo_url, co_time, winning, nomination
+    FROM Ordering
+    JOIN Crews ON Ordering.crew_id = Crews.id
+    LIMIT 3
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Famous Coworker Not Found.' })
+    } else {
+      console.log(data)
+      res.json(data)
+    }
+  })
+}
 
 module.exports = {
   register,
@@ -234,4 +489,11 @@ module.exports = {
   allActors,
   allDirectors,
   homeSearch,
+  crewInfo,
+  crewAward,
+  crewFamous,
+  crewActIn,
+  crewRating,
+  crewDuo,
+  crewFamousCoworker
 }
