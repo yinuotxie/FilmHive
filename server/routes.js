@@ -89,23 +89,122 @@ const login = async function (req, res) {
 
 // Route: GET /movie/search
 // Description: Search for movies based on filters
-const search = async function (req, res) {
+const movieSearch = async function (req, res) {
   const genre = req.query.genre ?? '';
-  const year = req.query.year ?? 0;
   const award = req.query.award ?? '';
   const country = req.query.country ?? '';
-  const runtime = req.query.runtime ?? 0;
-  const rating = req.query.rating ?? 0;
-  const realeaseYear = req.query.realeaseYear ?? '';
+  const runtime = req.query.runtime ?? '';
+  const rating = req.query.rating ?? '';
+  const releaseYear = req.query.releaseYear ?? '';
 
   let query = `
-    SELECT *
-    FROM Movies
-    WHERE 1 = 1
+    SELECT M.id, M.title, M.plot, M.poster
+    FROM (
+      SELECT id, title, plot, poster, release_year, country, runtimeMinutes, imdb_rating
+      FROM Movies
+      WHERE 1 = 1
   `;
+  
+  if (releaseYear !== '') {
+    query += ` AND release_year >= ${releaseYear}`;
+  }
+  
+  if (country !== '') {
+    query += ` AND country = '${country}'`;
+  }
+  
+  if (runtime !== '') {
+    query += ` AND runtimeMinutes >= ${runtime}`;
+  }
+  
+  if (rating !== '') {
+    query += ` AND imdb_rating >= ${rating}`;
+  }
+  
+  query += `
+      ) M
+      JOIN (
+        SELECT movie_id
+        FROM MovieGenres
+        WHERE genre_id = (SELECT id FROM Genres WHERE name = '${genre}')
+      ) MG ON M.id = MG.movie_id
+      JOIN (
+        SELECT movie_id
+        FROM OscarAwards
+        WHERE category = '${award}' AND is_winner = 1
+      ) OA ON M.id = OA.movie_id
+    ORDER BY M.imdb_rating, M.title DESC;
+  `;
+  
+  try {
+    const result = await db.query(query);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
+
+// Route: GET /actor/search
+// Description: Search for actors based on filters
+// TODO: change award to boolean. Use ActIn table to get actors 
+const actorSearch = async function (req, res) {
+  const rating = req.query.rating ?? 0.0;
+  const birthYear = req.query.birthYear ?? '';
+
+  let query = `
+    WITH Actors AS (
+      SELECT id, name, photo_url
+      FROM Crews
+      WHERE profession LIKE '%actor%' OR profession LIKE '%actress%'
+    ),
+    ActorAwards AS (
+      SELECT crew_id
+      FROM OscarAwards
+      WHERE is_winner = 1 AND category IN ('ACTOR', 'ACTRESS')
+    ),
+    ActorRatings AS (
+      SELECT crew_id, AVG(M.imdb_rating) AS avg_rating
+      FROM ActIn
+      JOIN Movies M ON ActIn.movie_id = M.id
+      JOIN Actors A ON A.id = ActIn.crew_id
+      WHERE 1=1
+  `;
+  
+  if (birthYear !== '') {
+    query += ` AND A.birth_year > ${birthYear}`;
+  }
+  
+  query += `
+      GROUP BY crew_id
+      HAVING AVG(M.imdb_rating) > ${rating}
+    )
+    SELECT A.id, A.name, A.photo_url, AR.avg_rating
+    FROM Actors A
+         JOIN ActorAwards AA ON A.id = AA.crew_id
+         JOIN ActorRatings AR ON A.id = AR.crew_id
+    ORDER BY AR.avg_rating, A.name DESC;
+  `;
+  
+  try {
+    const result = await db.query(query);
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
+
+// Route: GET /movie/recommendation
+// Description: Recommend movies based on user's preferences
+// TODO: return the top 5 movies based on user's preferences randomly 
+const movieRecommend = async function (req, res) {
 }
 
 module.exports = {
   register,
   login,
+  movieSearch,
+  actorSearch,
+  movieRecommend
 }
