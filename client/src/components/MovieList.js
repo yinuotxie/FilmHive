@@ -27,8 +27,8 @@ const MovieList = ({ filters }) => {
       params.genre = filters.genre
     }
 
-    if (filters.country) {
-      params.country = filters.country
+    if (filters.region) {
+      params.region = filters.region
     }
 
     if (filters.runtime) {
@@ -147,7 +147,7 @@ const MovieList = ({ filters }) => {
                 <strong>Genre: </strong> TODO!!!!!!!!
                 <br />
                 <br />
-                <strong>Country: </strong> {selectedMovie.country}
+                <strong>region: </strong> {selectedMovie.region}
                 <br />
                 <br />
                 <strong>Runtime: </strong> {selectedMovie.runtimeMinutes} min

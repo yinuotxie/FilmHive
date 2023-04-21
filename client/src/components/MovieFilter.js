@@ -6,7 +6,7 @@ const { Option } = Select
 const MovieFilter = ({ onFiltersChange }) => {
 
   const [genre, setGenre] = useState("")
-  const [country, setCountry] = useState("")
+  const [region, setRegion] = useState("")
   const [runtime, setRuntime] = useState(120)
   const [rating, setRating] = useState(6)
   const [releaseYear, setReleaseYear] = useState(2000)
@@ -17,8 +17,8 @@ const MovieFilter = ({ onFiltersChange }) => {
     setGenre(value)
   }
 
-  const handleCountryChange = (value) => {
-    setCountry(value)
+  const handleRegionChange = (value) => {
+    setRegion(value)
   }
 
   const handleRuntimeChange = (value) => {
@@ -44,7 +44,7 @@ const MovieFilter = ({ onFiltersChange }) => {
   const handleConfirmClick = () => {
     const updatedFilters = {
       genre: genre,
-      country: country,
+      region: region,
       runtime: runtime,
       rating: rating,
       releaseYear: releaseYear,
@@ -109,8 +109,8 @@ const MovieFilter = ({ onFiltersChange }) => {
           <Option value="reality-tv">Reality-TV</Option>
         </Select>
         <Select
-          placeholder="Country"
-          onChange={handleCountryChange}
+          placeholder="Region"
+          onChange={handleRegionChange}
           style={{ width: 150, marginRight: 10 }}
         >
           <Option value="Afghanistan">Afghanistan</Option>
