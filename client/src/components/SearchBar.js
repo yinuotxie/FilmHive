@@ -1,79 +1,53 @@
 import React, { useState } from "react"
-import { Input, Checkbox, Select, Button } from "antd"
+import { Input, Button, Modal, Card, Row, Col, Typography } from "antd"
+import axios from 'axios'
 
-const { Option } = Select
+const config = require('../config.json')
+
+const { Meta } = Card
 
 const SearchBar = () => {
-  const [searchType, setSearchType] = useState("")
-  const [searchValue, setSearchValue] = useState("")
-  const [genre, setGenre] = useState("")
-  const [year, setYear] = useState("")
-  const [award, setAward] = useState("")
-  const [country, setCountry] = useState("")
-  const [runtime, setRuntime] = useState("")
-  const [rating, setRating] = useState("")
-  const [releaseYear, setReleaseYear] = useState("")
-  const [job, setJob] = useState("")
-  const [birthYear, setBirthYear] = useState("")
 
-  const handleSearchTypeChange = (checkedValues) => {
-    setSearchType(checkedValues)
-  }
+  const [movies, setMovies] = useState([])
+  const [crews, setCrews] = useState([])
+  const [searchValue, setSearchValue] = useState("")
+  const [modalVisible, setModalVisible] = useState(false)
+  // const [searchResults, setSearchResults] = useState([])
 
   const handleSearchValueChange = (e) => {
     setSearchValue(e.target.value)
   }
 
-  const handleGenreChange = (value) => {
-    setGenre(value)
-  }
-
-  const handleYearChange = (value) => {
-    setYear(value)
-  }
-
-  const handleAwardChange = (value) => {
-    setAward(value)
-  }
-
-  const handleCountryChange = (value) => {
-    setCountry(value)
-  }
-
-  const handleRuntimeChange = (value) => {
-    setRuntime(value)
-  }
-
-  const handleRatingChange = (value) => {
-    setRating(value)
-  }
-
-  const handleReleaseYearChange = (value) => {
-    setReleaseYear(value)
-  }
-
-  const handleJobChange = (value) => {
-    setJob(value)
-  }
-
-  const handleBirthYearChange = (value) => {
-    setBirthYear(value)
-  }
-
   const handleConfirmClick = () => {
-    console.log({
-      searchType,
-      searchValue,
-      genre,
-      year,
-      award,
-      country,
-      runtime,
-      rating,
-      releaseYear,
-      job,
-      birthYear,
-    })
+
+    const params = {
+      searchValue: searchValue
+    }
+
+    axios.get(`http://${config.server_host}:${config.server_port}/homesearch`, { params })
+      .then(async (response) => {
+        console.log(response.data)
+        // setSearchResults(response.data.searchResults)
+        const movies = []
+        const crews = []
+        response.data.searchResults.forEach(result => {
+          if (result.type === 'movie') {
+            movies.push(result)
+          } else if (result.type === 'crew') {
+            crews.push(result)
+          }
+        })
+        setMovies(movies)
+        setCrews(crews)
+        setModalVisible(true)
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+
+
+  const handleCancel = () => {
+    setModalVisible(false)
   }
 
   return (
@@ -88,184 +62,78 @@ const SearchBar = () => {
         backgroundPosition: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.2)',
       }}>
-      <div style={{ marginBottom: 10 }}>
-        <Input
-          placeholder="Search for movies, actors, and directors"
-          value={searchValue}
-          onChange={handleSearchValueChange}
-          style={{ width: 700, marginRight: 10 }}
-        />
-      </div>
-      <div style={{ marginBottom: 10 }}>
-        <Checkbox
-          checked={searchType === "movie"}
-          onChange={() => handleSearchTypeChange(searchType === "movie" ? "" : "movie")}
-        >
-          Movie
-        </Checkbox>
-        <Checkbox
-          checked={searchType === "actor"}
-          onChange={() => handleSearchTypeChange(searchType === "actor" ? "" : "actor")}
-        >
-          Actor
-        </Checkbox>
-        <Checkbox
-          checked={searchType === "director"}
-          onChange={() => handleSearchTypeChange(searchType === "director" ? "" : "director")}
-        >
-          Director
-        </Checkbox>
-
-        {/* <Checkbox
-          checked={searchType === "movie"}
-          onChange={() => handleSearchTypeChange("movie")}
-        >
-          Movie
-        </Checkbox>
-        <Checkbox
-          checked={searchType === "actor"}
-          onChange={() => handleSearchTypeChange("actor")}
-        >
-          Actor
-        </Checkbox>
-        <Checkbox
-          checked={searchType === "director"}
-          onChange={() => handleSearchTypeChange("director")}
-        >
-          Director
-        </Checkbox> */}
-      </div>
-      <div style={{ marginBottom: 10 }}>
-        {
-          searchType === 'movie' && (
-            <>
-              <Select
-                placeholder="Genre"
-                onChange={handleGenreChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="action">Action</Option>
-                <Option value="comedy">Comedy</Option>
-                <Option value="drama">Drama</Option>
-                <Option value="horror">Horror</Option>
-                <Option value="thriller">Thriller</Option>
-              </Select>
-              <Select
-                placeholder="Year"
-                onChange={handleYearChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="2019">2019</Option>
-                <Option value="2020">2020</Option>
-                <Option value="2021">2021</Option>
-              </Select>
-              <Select
-                placeholder="Award"
-                onChange={handleAwardChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="oscar">Oscar</Option>
-                <Option value="golden-globe">Golden Globe</Option>
-                <Option value="bafta">BAFTA</Option>
-              </Select>
-              <Select
-                placeholder="Country"
-                onChange={handleCountryChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="usa">USA</Option>
-                <Option value="uk">UK</Option>
-                <Option value="france">France</Option>
-                <Option value="germany">Germany</Option>
-                <Option value="japan">Japan</Option>
-              </Select>
-              <Select
-                placeholder="Runtime"
-                onChange={handleRuntimeChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="90">90 min</Option>
-                <Option value="120">120 min</Option>
-                <Option value="150">150 min</Option>
-                <Option value="180">180 min</Option>
-              </Select>
-              <Select
-                placeholder="Rating"
-                onChange={handleRatingChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="1">1 star</Option>
-                <Option value="2">2 stars</Option>
-                <Option value="3">3 stars</Option>
-                <Option value="4">4 stars</Option>
-                <Option value="5">5 stars</Option>
-              </Select>
-              <Select
-                placeholder="Release Year"
-                onChange={handleReleaseYearChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="2010">2010</Option>
-                <Option value="2015">2015</Option>
-                <Option value="2020">2020</Option>
-                <Option value="2021">2021</Option>
-              </Select>
-            </>
-          )
-        }
-        {
-          (searchType === "actor" || searchType === "director") && (
-            <>
-              <Select
-                placeholder="Award"
-                onChange={handleAwardChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="oscar">Oscar</Option>
-                <Option value="emmy">Emmy</Option>
-                <Option value="tony">Tony</Option>
-              </Select>
-              <Select
-                placeholder="Job"
-                onChange={handleJobChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="director">Director</Option>
-                <Option value="writer">Writer</Option>
-                <Option value="actor">Actor</Option>
-                <Option value="cinematographer">Cinematographer</Option>
-              </Select>
-              <Select
-                placeholder="Rating"
-                onChange={handleRatingChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="1">1 star</Option>
-                <Option value="2">2 stars</Option>
-                <Option value="3">3 stars</Option>
-                <Option value="4">4 stars</Option>
-                <Option value="5">5 stars</Option>
-              </Select>
-              <Select
-                placeholder="Birth Year"
-                onChange={handleBirthYearChange}
-                style={{ marginRight: 10 }}
-              >
-                <Option value="1980">1980</Option>
-                <Option value="1990">1990</Option>
-                <Option value="2000">2000</Option>
-                <Option value="2010">2010</Option>
-              </Select>
-            </>
-          )
-        }
-      </div>
+      <Input
+        placeholder="Search everything!"
+        value={searchValue}
+        onChange={handleSearchValueChange}
+        style={{ width: 700, marginRight: 10 }}
+      />
       <Button type="primary" onClick={handleConfirmClick}>
         Search
       </Button>
+      <Modal
+        visible={modalVisible}
+        onCancel={handleCancel}
+        footer={null}
+        width={1600}
+      >
+        <Typography.Title level={2}>Search Results</Typography.Title>
+        <div style={{ overflowX: 'scroll', height: '850px', paddingRight: 20 }}>
+          <Typography.Title level={3}>Movies</Typography.Title>
+          <Row gutter={[16, 16]}>
+            {movies.map((result) => (
+              <Col span={4} key={result.id}>
+                <Card
+                  style={{ marginBottom: 10 }}
+                  hoverable
+                  cover={
+                    <img
+                      alt="url"
+                      src={
+                        result.image
+                          ? result.image
+                          : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='
+                      }
+                      style={{ maxWidth: '100%' }}
+                    />
+                  }
+                >
+                  <Meta title={result.name} />
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <br />
+          <br />
+          <Typography.Title level={3}>People</Typography.Title>
+          <Row gutter={[16, 16]}>
+            {crews.map((result) => (
+              <Col span={4} key={result.id}>
+                <Card
+                  style={{ marginBottom: 10 }}
+                  hoverable
+                  cover={
+                    <img
+                      alt="url"
+                      src={
+                        result.image
+                          ? result.image
+                          : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='
+                      }
+                      style={{ maxWidth: '100%' }}
+                    />
+                  }
+                >
+                  <Meta title={result.name} />
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </Modal>
+
     </div >
   )
 }
-
 
 export default SearchBar

@@ -30,7 +30,7 @@ function Register () {
     console.log(userInfo)
 
     try {
-      const response = await axios.get(`http://${config.server_host}:${config.server_port}/api/register`, { params: userInfo })
+      const response = await axios.get(`http://${config.server_host}:${config.server_port}/register`, { params: userInfo })
       console.log(response.data)
       navigate('/login', { replace: true })
       message.success('Sign up success')

@@ -6,7 +6,8 @@ import Register from '@/pages/Register'
 import 'antd/dist/reset.css'
 import Home from './pages/Home'
 import Movie from './pages/Movie'
-import Crew from './pages/Crew'
+import Actor from './pages/Actor'
+import Director from './pages/Director'
 
 function App () {
   return (
@@ -16,7 +17,9 @@ function App () {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />}></Route>
             <Route path="/movie" element={<Movie />}></Route>
-            <Route path="/crew" element={<Crew />}></Route>
+            <Route path="/actor" element={<Actor />}></Route>
+            <Route path="/director" element={<Director />}></Route>
+
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>

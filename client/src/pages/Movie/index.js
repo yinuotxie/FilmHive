@@ -1,7 +1,9 @@
+import MoviePage from "@/components/MoviePage"
+
 function Movie () {
   return (
-    <div>
-      <h1>Movie</h1>
+    <div style={{ justifyContent: 'center' }}>
+      <MoviePage />
     </div>
   )
 }
