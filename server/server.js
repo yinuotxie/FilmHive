@@ -14,6 +14,9 @@ app.get("/allmovies", routes.allMovies)
 app.get("/allactors", routes.allActors)
 app.get("/alldirectors", routes.allDirectors)
 app.get("/homesearch", routes.homeSearch)
+app.get("/multifaceddirector", routes.multifacedDirector)
+app.get("/movieoftheday", routes.movieOfTheDay)
+app.get("/recommendations", routes.recommendations)
 
 
 app.listen(config.server_port, () => {

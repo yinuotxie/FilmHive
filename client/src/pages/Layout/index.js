@@ -4,13 +4,18 @@ import {
   HomeOutlined,
   PlaySquareOutlined,
   LogoutOutlined,
-  TeamOutlined
+  TeamOutlined,
+  BarChartOutlined,
+  CameraOutlined
 } from '@ant-design/icons'
 import './index.scss'
+import { useStore } from "@/store"
 
 const { Header, Sider } = Layout
 
 const MainLayout = () => {
+
+  const { loginStore } = useStore()
 
   const { pathname } = useLocation()
 
@@ -23,8 +28,8 @@ const MainLayout = () => {
       <Header className="header">
         <div className="logo" />
         <div className="user-info">
-          <span className="user-name">user.name</span>
-          <span className="user-logout">
+          <span className="user-name" style={{ color: 'black' }}>{loginStore.token.username}</span>
+          <span className="user-logout" style={{ color: 'black' }}>
             <Popconfirm title="Log out?" okText="Yes" cancelText="No" onConfirm={handleLogoutConfirm}>
               <LogoutOutlined /> Logout
             </Popconfirm>
@@ -49,8 +54,11 @@ const MainLayout = () => {
             <Menu.Item icon={<TeamOutlined />} key="/actor">
               <Link to="/actor">Actor</Link>
             </Menu.Item>
-            <Menu.Item icon={<TeamOutlined />} key="/director">
+            <Menu.Item icon={<CameraOutlined />} key="/director">
               <Link to="/director">Director</Link>
+            </Menu.Item>
+            <Menu.Item icon={<BarChartOutlined />} key="/funfacts">
+              <Link to="/funfacts">Fun Facts</Link>
             </Menu.Item>
           </Menu>
         </Sider>

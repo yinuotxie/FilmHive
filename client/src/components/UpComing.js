@@ -43,7 +43,7 @@ const UpComing = () => {
     }}>
       <Typography.Title level={2}>Up coming movies</Typography.Title>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {upComings.slice(0, 12).map((item) => (
+        {upComings.slice(0, 14).map((item) => (
           <Card
             key={item.id}
             hoverable

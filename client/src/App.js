@@ -8,6 +8,7 @@ import Home from './pages/Home'
 import Movie from './pages/Movie'
 import Actor from './pages/Actor'
 import Director from './pages/Director'
+import FunFacts from './pages/FunFacts'
 
 function App () {
   return (
@@ -19,6 +20,7 @@ function App () {
             <Route path="/movie" element={<Movie />}></Route>
             <Route path="/actor" element={<Actor />}></Route>
             <Route path="/director" element={<Director />}></Route>
+            <Route path="/funfacts" element={<FunFacts />}></Route>
 
           </Route>
           <Route path="/login" element={<Login />}></Route>

@@ -226,6 +226,91 @@ const homeSearch = async function (req, res) {
   }
 }
 
+// multifaced directors
+const multifacedDirector = async function (req, res) {
+  try {
+    let query = `
+      SELECT c.id, c.name, c.photo_url, COUNT(DISTINCT g.id) as num_genres,
+             AVG(m.imdb_rating) as avg_rating
+      FROM Crews c
+           JOIN Direct d ON d.crew_id = c.id
+           JOIN Movies m ON m.id = d.movie_id
+           JOIN MovieGenres mg ON mg.movie_id = m.id
+           JOIN Genres g ON g.id = mg.genre_id
+      WHERE c.id IN (
+                SELECT DISTINCT d.crew_id
+                FROM Direct d
+                JOIN Movies m ON m.id = d.movie_id
+                JOIN MovieGenres mg ON mg.movie_id = m.id
+                GROUP BY d.crew_id
+                HAVING COUNT(DISTINCT mg.genre_id) > 1
+            )
+      GROUP BY c.id
+      HAVING AVG(m.imdb_rating) > 8
+      ORDER BY num_genres DESC, avg_rating DESC
+      LIMIT 10; 
+    `
+    const [rows] = await pool.query(query)
+    res.status(200).json({ directors: rows })
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
+}
+
+// movir of the day
+const movieOfTheDay = async function (req, res) {
+  try {
+    let query = `
+      SELECT id, title, imdb_rating, plot, poster
+      FROM Movies
+      ORDER BY RAND()
+      LIMIT 1
+    `
+    const [rows] = await pool.query(query)
+    res.status(200).json(rows[0])
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
+}
+
+// recommendations
+
+const recommendations = async function (req, res) {
+
+  const user_email = req.query.email || "yzphilly@outlook.com"
+
+  try {
+    let query = `
+      WITH MOVIE_PREF AS (
+          SELECT id, genre_id, title, imdb_rating, plot, poster
+          FROM Movies M JOIN MovieGenres MG on M.id = MG.movie_id
+          WHERE EXISTS (
+              SELECT genre_id
+              FROM UserPreference JOIN Genres G on UserPreference.genre_id = G.id
+              WHERE email = '${user_email}' AND genre_id = MG.genre_id
+          )
+      ),
+      AVG_GENRE_RATING AS (
+          SELECT genre_id, AVG(imdb_rating) AS avg_rating
+          FROM Movies M JOIN MovieGenres MG on M.id = MG.movie_id
+          GROUP BY genre_id
+      )
+      SELECT DISTINCT id, title, imdb_rating, plot, poster
+      FROM MOVIE_PREF MP
+           JOIN AVG_GENRE_RATING AGR on MP.genre_id = AGR.genre_id
+      WHERE imdb_rating > AGR.avg_rating
+      ORDER BY RAND()
+      LIMIT 10;
+    `
+    const [rows] = await pool.query(query, [user_email])
+    res.status(200).json({ movies: rows })
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
+}
 
 module.exports = {
   register,
@@ -234,4 +319,7 @@ module.exports = {
   allActors,
   allDirectors,
   homeSearch,
+  multifacedDirector,
+  movieOfTheDay,
+  recommendations
 }
