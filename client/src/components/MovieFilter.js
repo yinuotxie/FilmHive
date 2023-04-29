@@ -51,7 +51,7 @@ const MovieFilter = ({ onFiltersChange }) => {
       awarded: awarded,
       rated: rated
     }
-    console.log(updatedFilters)
+    // console.log(updatedFilters)
     onFiltersChange(updatedFilters)
   }
 

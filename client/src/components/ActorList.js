@@ -17,7 +17,7 @@ const ActorList = () => {
     const offset = (currentPage - 1) * actorsPerPage
     axios.get(`http://${config.server_host}:${config.server_port}/allactors?limit=${actorsPerPage}&offset=${offset}`)
       .then((response) => {
-        console.log(response.data.total)
+        // console.log(response.data.total)
         setActors(response.data.actors)
         setTotalActors(response.data.total)
       }).catch((error) => {

@@ -11,7 +11,6 @@ const MultifacedDirector = () => {
   useEffect(() => {
     axios.get(`http://${config.server_host}:${config.server_port}/multifaceddirector`)
       .then((response) => {
-        console.log(response.data.directors)
         setDirectors(response.data.directors)
       }).catch((error) => {
         console.log(error)

@@ -75,7 +75,6 @@ const login = async function (req, res) {
       console.log(err)
       res.status(401).json({ message: 'Invalid email or password' })
     } else {
-      console.log(data)
       res.json(data)
     }
   })
@@ -194,32 +193,63 @@ const allDirectors = async function (req, res) {
 
 // home page search
 const homeSearch = async function (req, res) {
+
   const searchValue = req.query.searchValue || ''
 
   try {
-    const [moviesResult] = await pool.query(`SELECT COUNT(*) as total FROM Movies WHERE title LIKE ?`, [`%${searchValue}%`])
-    const moviesTotal = moviesResult[0].total
-    const [moviesRows] = await pool.query(`SELECT * FROM Movies WHERE title LIKE ?`, [`%${searchValue}%`])
+    const [moviesResult] = await pool.query(`SELECT DISTINCT M.id, M.title, M.poster FROM Movies M WHERE title LIKE ?`, [`%${searchValue}%`])
+    const moviesTotal = moviesResult.length
 
-    const [crewsResult] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE name LIKE ?`, [`%${searchValue}%`])
-    const crewsTotal = crewsResult[0].total
-    const [crewsRows] = await pool.query(`SELECT * FROM Crews WHERE name LIKE ?`, [`%${searchValue}%`])
+    const [moviesActInResult] = await pool.query(`SELECT DISTINCT M.id, M.title, M.poster FROM Movies M JOIN ActIn AI on M.id = AI.movie_id JOIN Direct D on M.id = D.movie_id JOIN Crews C on AI.crew_id = C.id WHERE C.name LIKE ? `, [`%${searchValue}%`])
+    const moviesActInTotal = moviesActInResult.length
 
-    const movies = moviesRows.map((movie) => ({
+    const [moviesCharactersResult] = await pool.query(`SELECT DISTINCT M.id, M.title, M.poster FROM Movies M JOIN ActIn AI on M.id = AI.movie_id WHERE AI.character LIKE ?`, [`%${searchValue}%`])
+    const moviesCharactersTotal = moviesCharactersResult.length
+
+    const [actorsResult] = await pool.query(`SELECT id, name, photo_url FROM Actors WHERE Actors.name LIKE ?`, [`%${searchValue}%`])
+    const actorsTotal = actorsResult.length
+
+    const [directorsResult] = await pool.query(`SELECT id, name, photo_url FROM Directors WHERE Directors.name LIKE ?`, [`%${searchValue}%`])
+    const directorsTotal = directorsResult.length
+
+    const movies = moviesResult.map((movie) => ({
       name: movie.title,
       image: movie.poster,
-      type: 'movie',
+      type: 'movie1',
       id: movie.id,
     }))
-    const crews = crewsRows.map((crew) => ({
-      name: crew.name,
-      image: crew.photo_url,
-      type: 'crew',
-      id: crew.id,
-    }))
-    const searchResults = [...movies, ...crews]
 
-    res.status(200).json({ searchResults: searchResults, total: moviesTotal + crewsTotal })
+    const moviesActIn = moviesActInResult.map((movie) => ({
+      name: movie.title,
+      image: movie.poster,
+      type: 'movie2',
+      id: movie.id,
+    }))
+
+    const moviesCharacters = moviesCharactersResult.map((movie) => ({
+      name: movie.title,
+      image: movie.poster,
+      type: 'movie3',
+      id: movie.id,
+    }))
+
+    const actors = actorsResult.map((actor) => ({
+      name: actor.name,
+      image: actor.photo_url,
+      type: 'actor',
+      id: actor.id,
+    }))
+
+    const directors = directorsResult.map((director) => ({
+      name: director.name,
+      image: director.photo_url,
+      type: 'director',
+      id: director.id,
+    }))
+
+    const searchResults = [...movies, ...moviesActIn, ...moviesCharacters, ...actors, ...directors]
+
+    res.status(200).json({ searchResults: searchResults, moviesTotal: moviesTotal, moviesActInTotal: moviesActInTotal, moviesCharactersTotal: moviesCharactersTotal, actorsTotal: actorsTotal, directorsTotal: directorsTotal })
   } catch (err) {
     console.log(err)
     res.status(500).send('Error retrieving data from database')

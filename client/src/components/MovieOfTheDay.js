@@ -10,7 +10,6 @@ const MovieOfTheDay = () => {
   useEffect(() => {
     axios.get(`http://${config.server_host}:${config.server_port}/movieoftheday`)
       .then((response) => {
-        console.log(response.data)
         setMovie(response.data)
       }).catch((error) => {
         console.log(error)

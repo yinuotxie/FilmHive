@@ -17,7 +17,6 @@ const Reccomendation = () => {
 
     axios.get(`http://${config.server_host}:${config.server_port}/recommendations`, { user_email })
       .then((response) => {
-        console.log(response.data.movies)
         setMovies(response.data.movies)
       }).catch((error) => {
         console.log(error)

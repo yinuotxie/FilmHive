@@ -17,7 +17,7 @@ const DirectorList = () => {
     const offset = (currentPage - 1) * directorsPerPage
     axios.get(`http://${config.server_host}:${config.server_port}/alldirectors?limit=${directorsPerPage}&offset=${offset}`)
       .then((response) => {
-        console.log(response.data.total)
+        // console.log(response.data.total)
         setDirectors(response.data.directors)
         setTotalDirectors(response.data.total)
       }).catch((error) => {

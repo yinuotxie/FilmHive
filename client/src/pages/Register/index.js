@@ -32,7 +32,6 @@ function Register () {
 
     try {
       const response = await axios.get(`http://${config.server_host}:${config.server_port}/register`, { params: userInfo })
-      console.log(response.data)
       navigate('/login', { replace: true })
       message.success('Sign up success')
     } catch (error) {
