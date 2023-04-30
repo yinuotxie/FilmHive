@@ -112,20 +112,21 @@ const MovieList = ({ filters }) => {
       axios.get(`http://${config.server_host}:${config.server_port}/selectedawards`, { params })
         .then((response) => {
           if (response.data.length > 0) {
-            const uniqueAwardsByYear = response.data.reduce((acc, award) => {
-              const { year, category } = award
-              const existingCategories = acc[year] || new Set()
-              existingCategories.add(category)
-              acc[year] = existingCategories
-              return acc
-            }, {})
+            // const uniqueAwardsByYear = response.data.reduce((acc, award) => {
+            //   const { year, category, is_winner } = award
+            //   const existingCategories = acc[year] || new Set()
+            //   existingCategories.add(category)
+            //   acc[year] = existingCategories
+            //   return acc
+            // }, {})
 
-            const result = Object.entries(uniqueAwardsByYear).map(([year, categories]) => ({
-              year: Number(year),
-              category: [...categories].join(" / ")
-            }))
-            setSelectedAwards(result)
-            console.log(result)
+            // const result = Object.entries(uniqueAwardsByYear).map(([year, categories]) => ({
+            //   year: Number(year),
+            //   category: [...categories].join(" / ")
+            // }))
+            // setSelectedAwards(result)
+            setSelectedAwards(response.data)
+            console.log(response.data)
           }
           else {
             setSelectedAwards('')
@@ -143,9 +144,6 @@ const MovieList = ({ filters }) => {
 
       axios.get(`http://${config.server_host}:${config.server_port}/selecteddirectors`, { params })
         .then((response) => {
-          console.log("hahahahhahhahaahahhahahhahahha")
-
-          console.log(response)
           setSelectedDirectors(response.data)
         }).catch((error) => {
           console.log(error)
@@ -268,13 +266,21 @@ const MovieList = ({ filters }) => {
                     <Typography.Title level={5} style={{ display: "inline-block" }}>IMDB Rating:</Typography.Title> {selectedMovie.imdb_rating} / 10.0
                     <br />
                     <br />
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Rated:</Typography.Title> {selectedMovie.rated ? selectedMovie.rated : '/'}
+                    <br />
+                    <br />
                     {selectedAwards && <>
-                      <Typography.Title level={5} style={{ display: "inline-block" }}>Award Information:</Typography.Title> In {selectedAwards[0].year}, this movie won {selectedAwards[0].category.split('/').length} Oscar Awards in {selectedAwards[0].category}
+                      <Typography.Title level={5} style={{ display: "inline-block" }}>Oscar Award Information:</Typography.Title>
                       <br />
                       <br />
+                      {selectedAwards && selectedAwards.sort((a, b) => b.is_winner - a.is_winner).map((award) => (
+                        <div key={award.id}>
+                          <Typography.Text>{award.year} - {award.category}</Typography.Text>
+                          <Typography.Text type={award.is_winner ? "success" : "secondary"}> ({award.is_winner ? "Winner" : "Nominee"})</Typography.Text>
+                        </div>
+                      ))}
                     </>
                     }
-                    <Typography.Title level={5} style={{ display: "inline-block" }}>Rated:</Typography.Title> {selectedMovie.rated ? selectedMovie.rated : '/'}
                   </p>
                 </div>
               </div>
