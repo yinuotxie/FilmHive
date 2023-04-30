@@ -106,7 +106,7 @@ const allMovies = async function (req, res) {
 
   try {
     let query = `
-    SELECT DISTINCT Movies.id, Movies.region, Movies.release_year, Movies.runtimeMinutes, Movies.title, Movies.imdb_rating, Movies.plot, Movies.poster
+    SELECT DISTINCT Movies.id, Movies.region, Movies.release_year, Movies.runtimeMinutes, Movies.title, Movies.imdb_rating, Movies.plot, Movies.poster, Movies.rated
     FROM Movies 
          JOIN MovieGenres ON Movies.id = MovieGenres.movie_id
          JOIN Genres ON MovieGenres.genre_id = Genres.id
