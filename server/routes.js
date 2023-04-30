@@ -174,12 +174,66 @@ const allActors = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
   const offset = parseInt(req.query.offset || 0)
+  const searchValue = req.query.searchValue || ''
+  const ratingMin = parseFloat(req.query.ratingMin) || 0
+  const ratingMax = parseFloat(req.query.ratingMax) || 10
+  const birthYearMin = parseInt(req.query.birthYearMin) || 1830
+  const birthYearMax = parseInt(req.query.birthYearMax) || 2020
+  const awarded = req.query.awarded === 'true' ? 1 : 0
+  const nominated = req.query.nominated === 'true' ? 1 : 0
 
   try {
-    const [results] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE profession LIKE '%actor%' OR profession LIKE '%actress%'`)
-    const total = results[0].total
-    const [rows] = await pool.query(`SELECT * FROM Crews WHERE profession LIKE '%actor%' OR profession LIKE '%actress%' LIMIT ? OFFSET ?`, [limit, offset])
-    res.status(200).json({ actors: rows, total: total })
+    let query = `
+    WITH ActorRatings AS (
+      SELECT crew_id, AVG(M.imdb_rating) AS avg_rating
+      FROM ActIn AI Join Movies M on AI.movie_id = M.id
+      GROUP BY crew_id
+  )
+  SELECT DISTINCT C.id, C.name, C.photo_url, C.profession
+  FROM Crews C
+  JOIN ActorRatings AR on C.id = AR.crew_id
+  `
+    if (awarded || nominated) {
+      query += ` JOIN OscarAwards OA on C.id = OA.crew_id`
+    }
+
+    query += ` WHERE AR.avg_rating >= ? AND AR.avg_rating <= ?
+    AND C.birth_year >= ? AND C.birth_year <= ?
+    `
+
+    const params = [ratingMin, ratingMax, birthYearMin, birthYearMax]
+
+    if (searchValue) {
+      query += ` AND C.name LIKE ?`
+      params.push(`%${searchValue}%`)
+    }
+
+    if (awarded) {
+      query += ` AND OA.is_winner >= 1`
+    }
+
+    if (nominated) {
+      query += ` AND OA.is_winner >= 0`
+    }
+
+    query += ` AND (C.profession LIKE '%actor%' OR profession LIKE '%actress%')`
+
+    let total = 0
+    if (searchValue || ratingMin || ratingMax !== 10 || birthYearMin !== 1830 || birthYearMax !== 2020 || awarded || nominated) {
+      const [temp] = await pool.query(query, params)
+      total = temp.length
+    } else {
+      total = 69693
+    }
+
+    query += ' LIMIT ? OFFSET ?'
+    params.push(limit, offset)
+
+    const [results] = await pool.query(query, params)
+    console.log(query)
+    console.log(params)
+
+    res.status(200).json({ actors: results, total: total })
   } catch (err) {
     console.log(err)
     res.status(500).send('Error retrieving actors from database')

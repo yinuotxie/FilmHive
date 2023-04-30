@@ -1,11 +1,9 @@
-import CrewFilter from "@/components/CrewFilter"
-import ActorList from "@/components/ActorList"
+import ActorPage from "@/components/ActorPage"
 
 function Actor () {
   return (
-    <div>
-      <CrewFilter />
-      <ActorList />
+    <div style={{ justifyContent: 'center' }}>
+      <ActorPage />
     </div>
   )
 }

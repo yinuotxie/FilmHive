@@ -6,7 +6,7 @@ const config = require('../config.json')
 
 const { Meta } = Card
 
-const ActorList = () => {
+const ActorList = ({ filters }) => {
 
   const [actors, setActors] = useState([])
   const [totalActors, setTotalActors] = useState(0)
@@ -23,19 +23,61 @@ const ActorList = () => {
   const [selectedCo, setSelectedCo] = useState('')
 
   useEffect(() => {
+
+    console.log(filters)
     const offset = (currentPage - 1) * actorsPerPage
-    axios.get(`http://${config.server_host}:${config.server_port}/allactors?limit=${actorsPerPage}&offset=${offset}`)
+
+    const params = {
+      limit: actorsPerPage,
+      offset: offset
+    }
+
+    if (filters.searchValue) {
+      params.searchValue = filters.searchValue
+    }
+
+    if (filters.ratingMin) {
+      params.ratingMin = filters.ratingMin
+    }
+
+    if (filters.ratingMax) {
+      params.ratingMax = filters.ratingMax
+    }
+
+    if (filters.birthYearMin) {
+      params.birthYearMin = filters.birthYearMin
+    }
+
+    if (filters.birthYearMax) {
+      params.birthYearMax = filters.birthYearMax
+    }
+
+    if (filters.awarded) {
+      params.awarded = filters.awarded
+    }
+
+    if (filters.nominated) {
+      params.nominated = filters.nominated
+    }
+
+    axios.get(`http://${config.server_host}:${config.server_port}/allactors`, { params })
       .then((response) => {
+        console.log(response.data)
         setActors(response.data.actors)
         setTotalActors(response.data.total)
       }).catch((error) => {
         console.log(error)
       })
-  }, [currentPage, actorsPerPage])
+  }, [currentPage, actorsPerPage, filters])
 
   useEffect(() => {
     setCurrentPage(1)
-  }, [actorsPerPage])
+  }, [actorsPerPage, filters])
+
+  useEffect(() => {
+    setTotalActors(-1)
+    setActors([])
+  }, [filters])
 
   useEffect(() => {
 
@@ -198,13 +240,13 @@ const ActorList = () => {
                     <Typography.Title level={5} style={{ display: "inline-block" }}>Name:</Typography.Title> {selectedActor.name}
                     <br />
                     <br />
-                    <Typography.Title level={5} style={{ display: "inline-block" }}>Birth Date:</Typography.Title> {selectedActor.birth_date ? selectedActor.birth_date.match(/^\d{4}-\d{2}-\d{2}/)[0] : "we don't know"}
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Birth Date:</Typography.Title> {selectedActor.birth_date ? selectedActor.birth_date.match(/^\d{4}-\d{2}-\d{2}/)[0] : "It's a mystery!"}
                     <br />
                     <br />
                     <Typography.Title level={5} style={{ display: "inline-block" }}>Death Year:</Typography.Title> {selectedActor.death_year ? selectedActor.death_year : "Alive"}
                     <br />
                     <br />
-                    <Typography.Title level={5} style={{ display: "inline-block" }}>Profession:</Typography.Title> {selectedActor.profession.split(',').map((item) => item.trim()).join(' / ')}
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Profession(s):</Typography.Title> {selectedActor.profession.split(',').map((item) => item.trim()).join(' / ')}
                     <br />
                     <br />
                     <Typography.Title level={5} style={{ display: "inline-block" }}>Average Movies Rating:</Typography.Title> {parseFloat(selectedRating).toFixed(2)} / 10.00
