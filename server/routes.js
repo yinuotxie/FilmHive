@@ -70,19 +70,26 @@ const register = async function (req, res) {
 const login = async function (req, res) {
 
   const email = req.query.email
+  const password = req.query.password
 
-  connection.query(`
+  try {
+    let query = `
     SELECT *
     FROM Users
-    WHERE email = '${email}'
-  `, (err, data) => {
-    if (err || data.length === 0) {
-      console.log(err)
-      res.status(401).json({ message: 'Invalid email or password' })
+    WHERE email = '${email}' AND password = '${password}'
+  `
+    const [results] = await pool.query(query, [email, password])
+
+    if (results.length === 0) {
+      return res.status(401).json({ message: 'Invalid email or password' })
     } else {
-      res.json(data)
+      return res.status(200).json(results[0])
     }
-  })
+  } catch (error) {
+    console.error(error)
+    res.sendStatus(500)
+  }
+
 }
 
 
@@ -345,7 +352,6 @@ const recommendations = async function (req, res) {
       FROM MOVIE_PREF MP
            JOIN AVG_GENRE_RATING AGR on MP.genre_id = AGR.genre_id
       WHERE imdb_rating > AGR.avg_rating
-      ORDER BY RAND()
       LIMIT 14;
     `
     const [rows] = await pool.query(query, [user_email])
@@ -373,7 +379,6 @@ const selectedGenres = async function (req, res) {
     const genres = results[0].map(genre => genre.name).join(' / ')
 
     res.status(200).json({ genres })
-
   } catch (err) {
     console.error(err.message)
     res.status(500).json({ error: 'Server error' })
@@ -393,7 +398,6 @@ const selectedAwards = async function (req, res) {
       WHERE movie_id = ?
     `
     const results = await pool.query(query, [movie_id])
-    // console.log(results[0])
     res.json(results[0])
 
   } catch (err) {
@@ -416,7 +420,6 @@ const selectedActors = async function (req, res) {
     `
     const results = await pool.query(query, [movie_id])
     res.json(results[0])
-
   } catch (err) {
     console.error(err.message)
     res.status(500).json({ error: 'Server error' })
@@ -436,7 +439,6 @@ const selectedDirectors = async function (req, res) {
       WHERE Direct.movie_id = ?;
     `
     const results = await pool.query(query, [movie_id])
-    console.log(results[0])
 
     res.json(results[0])
 
@@ -465,7 +467,6 @@ const selectedActorAvgRaing = async function (req, res) {
   `
     const results = await pool.query(query, [actor_id])
     res.json(results[0])
-
   } catch (err) {
     console.error(err.message)
     res.status(500).json({ error: 'Server error' })

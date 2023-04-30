@@ -1,0 +1,882 @@
+{
+    "login": {
+        "email": "jane@example.com",
+        "username": "JaneDoe",
+        "password": "password456"
+    },
+    "homeSearch": [
+        {
+            "id": "tt2245084",
+            "region": "United States",
+            "release_year": 2014,
+            "runtimeMinutes": 102,
+            "title": "Big Hero 6",
+            "imdb_rating": 7.8,
+            "plot": "When a devastating event befalls the city of San Fransokyo and catapults Hiro into the midst of danger, he turns to Baymax and his close friends adrenaline junkie Go Go Tomago, neatnik Wasabi, chemistry whiz Honey Lemon and fanboy Fred. Determined to uncover the mystery, Hiro transforms his friends into a band of high-tech heroes called \"Big Hero 6.\"",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMDliOTIzNmUtOTllOC00NDU3LWFiNjYtMGM0NDc1YTMxNjYxXkEyXkFqcGdeQXVyNTM3NzExMDQ@._V1_SX300.jpg",
+            "rated": "PG"
+        },
+        {
+            "id": "tt1192628",
+            "region": "United States",
+            "release_year": 2011,
+            "runtimeMinutes": 107,
+            "title": "Rango",
+            "imdb_rating": 7.2,
+            "plot": "Rango is a pet chameleon always on the lookout for action and adventure, except the fake kind, where he directs it and acts in it. After a car accident, he winds up in an old western town called Dirt. What this town needs the most is water, but they also need a hero and a sheriff. The thirsty Rango instantly takes on the role of both and selfishly agrees to take on the case of their missing water.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTc4NjEyODE1OV5BMl5BanBnXkFtZTcwMjYzNTkxNA@@._V1_SX300.jpg",
+            "rated": "PG"
+        },
+        {
+            "id": "tt0964517",
+            "region": "United States",
+            "release_year": 2010,
+            "runtimeMinutes": 116,
+            "title": "The Fighter",
+            "imdb_rating": 7.8,
+            "plot": "The Fighter is a drama about boxer \"Irish\" Micky Ward's unlikely road to the world light welterweight title. His Rocky-like rise was shepherded by half-brother Dicky, a boxer-turned-trainer on the verge of being KO'd by drugs and crime.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTM0ODk3MjM1MV5BMl5BanBnXkFtZTcwNzc1MDIwNA@@._V1_SX300.jpg",
+            "rated": "R"
+        },
+        {
+            "id": "tt0499549",
+            "region": "United States",
+            "release_year": 2009,
+            "runtimeMinutes": 162,
+            "title": "Avatar",
+            "imdb_rating": 7.9,
+            "plot": "When his brother is killed in a robbery, paraplegic Marine Jake Sully decides to take his place in a mission on the distant world of Pandora. There he learns of greedy corporate figurehead Parker Selfridge's intentions of driving off the native humanoid \"Na'vi\" in order to mine for the precious material scattered throughout their rich woodland. In exchange for the spinal surgery that will fix his legs, Jake gathers knowledge, of the Indigenous Race and their Culture, for the cooperating military unit spearheaded by gung-ho Colonel Quaritch, while simultaneously attempting to infiltrate the Na'vi people with the use of an \"avatar\" identity. While Jake begins to bond with the native tribe and quickly falls in love with the beautiful alien Neytiri, the restless Colonel moves forward with his ruthless extermination tactics, forcing the soldier to take a stand - and fight back in an epic battle for the fate of Pandora.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZDA0OGQxNTItMDZkMC00N2UyLTg3MzMtYTJmNjg3Nzk5MzRiXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt0383574",
+            "region": "United States",
+            "release_year": 2006,
+            "runtimeMinutes": 151,
+            "title": "Pirates of the Caribbean: Dead Man's Chest",
+            "imdb_rating": 7.3,
+            "plot": "Once again we're plunged into the world of sword fights and \"savvy\" pirates. Captain Jack Sparrow is reminded he owes a debt to Davy Jones, who captains the flying Dutchman, a ghostly ship, with a crew from hell. Facing the \"locker\" Jack must find the heart of Davy Jones but to save himself he must get the help of quick-witted Will Turner and Elizabeth Swan. If that's not complicated enough, Will and Elizabeth are sentenced to hang, unless Will can get Lord Cutler Beckett Jack's compass. Will is forced to join another crazy adventure with Jack.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTcwODc1MTMxM15BMl5BanBnXkFtZTYwMDg1NzY3._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt0498380",
+            "region": "United States",
+            "release_year": 2006,
+            "runtimeMinutes": 141,
+            "title": "Letters from Iwo Jima",
+            "imdb_rating": 7.9,
+            "plot": "The island of Iwo Jima stands between the American military force and the home islands of Japan. Therefore the Imperial Japanese Army is desperate to prevent it from falling into American hands and providing a launching point for an invasion of Japan. General Tadamichi Kuribayashi (Ken Watanabe) is given command of the forces on the island and sets out to prepare for the imminent attack. General Kuribayashi, however, does not favor the rigid traditional approach recommended by his subordinates, and resentment and resistance fester amongst his staff. In the lower echelons, a young soldier, Saigo (Kazunari Ninomiya), a poor baker in civilian life, strives with his friends to survive the harsh regime of the Japanese Army itself, all the while knowing that a fierce battle looms. When the American invasion begins, Kuribayashi and Saigo find strength, honor, courage, and horrors beyond imagination.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjE0NzgwODI4M15BMl5BanBnXkFtZTcwNjg3OTA0MQ@@._V1_SX300.jpg",
+            "rated": "R"
+        },
+        {
+            "id": "tt0316654",
+            "region": "United States",
+            "release_year": 2004,
+            "runtimeMinutes": 127,
+            "title": "Spider-Man 2",
+            "imdb_rating": 7.4,
+            "plot": "Peter Parker is an unhappy man: after two years of fighting crime as Spider-Man, his life has begun to fall apart. The girl he loves is engaged to someone else, his grades are slipping, he cannot keep any of his jobs, and on top of it, the newspaper Daily Bugle is attacking him viciously, claiming that Spider-Man is a criminal. He reaches the breaking point and gives up the crime fighter's life, once and for all. But after a failed fusion experiment, eccentric and obsessive scientist Dr. Otto Octavius is transformed into super villain Doctor Octopus, Doc Ock for short, having four long tentacles as extra hands. Peter guesses it might just be time for Spider-Man to return, but would he act upon it?",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMzY2ODk4NmUtOTVmNi00ZTdkLTlmOWYtMmE2OWVhNTU2OTVkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt0317705",
+            "region": "United States",
+            "release_year": 2004,
+            "runtimeMinutes": 115,
+            "title": "The Incredibles",
+            "imdb_rating": 8,
+            "plot": "Bob Parr (A.K.A. Mr. Incredible), and his wife Helen (A.K.A. Elastigirl), are the world's greatest famous crime-fighting superheroes in Metroville. Always saving lives and battling evil on a daily basis. But fifteen years later, they have been forced to adopt civilian identities and retreat to the suburbs where they have no choice but to retire as superheroes to live a \"normal life\" with their three children Violet, Dash and Jack-Jack (who were secretly born with superpowers). Itching to get back into action, Bob gets his chance when a mysterious communication summons him to a remote island for a top secret assignment. He soon discovers that it will take a super family effort to rescue the world from total destruction.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTY5OTU0OTc2NV5BMl5BanBnXkFtZTcwMzU4MDcyMQ@@._V1_SX300.jpg",
+            "rated": "PG"
+        },
+        {
+            "id": "tt0311113",
+            "region": "United States",
+            "release_year": 2003,
+            "runtimeMinutes": 138,
+            "title": "Master and Commander: The Far Side of the World",
+            "imdb_rating": 7.4,
+            "plot": "In April 1805 during the Napoleonic Wars, H.M.S. Surprise, a British frigate, is under the command of Captain Jack Aubrey. Aubrey and the Surprise's current orders are to track and capture or destroy a French privateer named Acheron. The Acheron is currently in the Atlantic off South America headed toward the Pacific in order to extend Napoleon's reach of the wars. This task will be a difficult one as Aubrey quickly learns in an initial battle with the Acheron that it is a bigger and faster ship than the Surprise, which puts the Surprise at a disadvantage. Aubrey's single-mindedness in this seemingly impossible pursuit puts him at odds with the Surprise's doctor and naturalist, Stephen Maturin, who is also Aubrey's most trusted advisor on board and closest friend. Facing other internal obstacles which have resulted in what they consider a string of bad luck, Aubrey ultimately uses Maturin's scientific exploits to figure out a way to achieve his and the ship's seemingly impossible goal.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZGRjM2IyM2EtZDAxYi00NTdjLTliMGYtMmRhZGUyNjRjNWYwXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt0139654",
+            "region": "United States",
+            "release_year": 2001,
+            "runtimeMinutes": 122,
+            "title": "Training Day",
+            "imdb_rating": 7.7,
+            "plot": "In Los Angeles, a city where streets are overrun by drug dealers, those who have sworn to uphold the law are breaking them to clean up the streets. Denzel Washington plays L.A.P.D. detective Alonzo Harris, a veteran narcotics officer whose methods of enforcing the law are questionable, if not corrupt. 'Training Day' follows Harris as he trains rookie Jake Hoyt over a 24-hour period. Ethical dilemmas arise for Hoyt as well as the audience as questions present themselves as to whether or not Harris' methodology for ridding the streets of South Central Los Angeles of drugs is right or wrong.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMDZkMTUxYWEtMDY5NS00ZTA5LTg3MTItNTlkZWE1YWRjYjMwL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
+            "rated": "R"
+        },
+        {
+            "id": "tt1950186",
+            "region": "United States",
+            "release_year": 2019,
+            "runtimeMinutes": 152,
+            "title": "Ford v Ferrari",
+            "imdb_rating": 8.1,
+            "plot": "As Enzo Ferrari's fast Rosso-Corsa racing cars dominate the mid-1960s motorsport world, the American car designer, Carroll Shelby, is forced to retire after winning the demanding 1959 '24 Hours of Le Mans' endurance race. But, before long, an unexpected proposition by the Vice President of Henry Ford's motor company, Lee Iacocca, will offer an opportunity to beat the Italians at their own game. Now, under those pressing circumstances, the British sports car driver and racing engineer, Ken Miles, reluctantly agrees to lend a hand and improve the firm's image, as Ford's race team has less than ninety days to rewrite history. As a result, the non-conformist duo comes up with the mighty Ford GT40 Mk I high-performance racing car. Can Shelby and Miles break Ferrari's streak?",
+            "poster": "https://m.media-amazon.com/images/M/MV5BM2UwMDVmMDItM2I2Yi00NGZmLTk4ZTUtY2JjNTQ3OGQ5ZjM2XkEyXkFqcGdeQXVyMTA1OTYzOTUx._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt1825683",
+            "region": "United States",
+            "release_year": 2018,
+            "runtimeMinutes": 134,
+            "title": "Black Panther",
+            "imdb_rating": 7.3,
+            "plot": "After the events of Captain America: Civil War, Prince T'Challa returns home to the reclusive, technologically advanced African nation of Wakanda to serve as his country's new king. However, T'Challa soon finds that he is challenged for the throne from factions within his own country. When two foes conspire to destroy Wakanda, the hero known as Black Panther must team up with C.I.A. agent Everett K. Ross and members of the Dora Milaje, Wakandan special forces, to prevent Wakanda from being dragged into a world war.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SX300.jpg",
+            "rated": "PG-13"
+        },
+        {
+            "id": "tt4633694",
+            "region": "United States",
+            "release_year": 2018,
+            "runtimeMinutes": 117,
+            "title": "Spider-Man: Into the Spider-Verse",
+            "imdb_rating": 8.4,
+            "plot": "Phil Lord and Christopher Miller, the creative minds behind The Lego Movie and 21 Jump Street, bring their unique talents to a fresh vision of a different Spider-Man Universe, with a groundbreaking visual style that's the first of its kind. \"Spider-Man(TM): Into the Spider-Verse\" introduces Brooklyn teen Miles Morales (Shameik Moore), and the limitless possibilities of the Spider-Verse, where more than one can wear the mask.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjMwNDkxMTgzOF5BMl5BanBnXkFtZTgwNTkwNTQ3NjM@._V1_SX300.jpg",
+            "rated": "PG"
+        },
+        {
+            "id": "tt2179136",
+            "region": "United States",
+            "release_year": 2014,
+            "runtimeMinutes": 133,
+            "title": "American Sniper",
+            "imdb_rating": 7.3,
+            "plot": "Chris Kyle (Bradley Cooper) was nothing more than a Texas man who dreamt of becoming a cowboy, but in his thirties he found out that maybe his life needed something different, something where he could express his real talent, something that could help America in its fight against terrorism. So he joined the S.E.A.L.s in order to become a sniper. After marrying Taya (Sienna Miller), Kyle and the other members of the team are called for their first tour of Iraq. Kyle's struggle isn't with his missions, but about his relationship with the reality of the war and, once returned at home, how he manages to handle it with his urban life, his wife, and kids.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTkxNzI3ODI4Nl5BMl5BanBnXkFtZTgwMjkwMjY4MjE@._V1_SX300.jpg",
+            "rated": "R"
+        }
+    ],
+    "multifacedDirector": [
+        {
+            "id": "nm3127702",
+            "name": "Tetsuya Takehora",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/54/%E4%B8%8A%E9%87%8E%E3%82%AA%E3%83%BC%E3%82%AF%E3%83%A9%E5%8A%87%E5%A0%B4%E3%80%8E%E7%99%BA%E6%83%85%E7%89%A9%E8%AA%9E%E3%80%8F%E8%88%9E%E5%8F%B0%E6%8C%A8%E6%8B%B620191228152107_IMG_4679.jpg",
+            "num_genres": 11,
+            "avg_rating": 8.6
+        },
+        {
+            "id": "nm0251027",
+            "name": "Ertem Egilmez",
+            "photo_url": null,
+            "num_genres": 9,
+            "avg_rating": 8.070270270270274
+        },
+        {
+            "id": "nm0634240",
+            "name": "Christopher Nolan",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/Christopher_Nolan_Cannes_2018.jpg",
+            "num_genres": 8,
+            "avg_rating": 8.146875
+        },
+        {
+            "id": "nm0619056",
+            "name": "T.S. Nagabharana",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/19/NagabharanaTS-01.jpg",
+            "num_genres": 8,
+            "avg_rating": 8.05
+        },
+        {
+            "id": "nm6216421",
+            "name": "Pauli Janhunen Calderón",
+            "photo_url": null,
+            "num_genres": 6,
+            "avg_rating": 8.02
+        },
+        {
+            "id": "nm1098369",
+            "name": "Ross MacGibbon",
+            "photo_url": null,
+            "num_genres": 6,
+            "avg_rating": 8.006666666666666
+        },
+        {
+            "id": "nm0002160",
+            "name": "Moustapha Akkad",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/en/2/27/Moustapha_Akkad.gif",
+            "num_genres": 5,
+            "avg_rating": 8.4
+        },
+        {
+            "id": "nm3586222",
+            "name": "Thiagarajan Kumararaja",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/b1/Thiagarajan_Kumararaja_at_Launch_of_Stone_Bench_Films_and_Originals.jpg",
+            "num_genres": 5,
+            "avg_rating": 8.399999999999999
+        },
+        {
+            "id": "nm3642647",
+            "name": "Paresh Mokashi",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Paresh_Mokashi_2.JPG",
+            "num_genres": 5,
+            "avg_rating": 8.357142857142858
+        },
+        {
+            "id": "nm3642592",
+            "name": "Pravin Tarde",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/79/Pravin-tarde-actor_201809135248.jpg",
+            "num_genres": 5,
+            "avg_rating": 8.355555555555554
+        }
+    ],
+    "recommendations": [
+        {
+            "id": "tt0069236",
+            "title": "Score",
+            "imdb_rating": 5.8,
+            "plot": "A happily married bisexual swinging couple, Jack and Elvira who spend their days lounging around the villa making bets and having sex. One weekend, they turn their sights on a couple of naive newlyweds, Betsy and Eddie and bet on whether or not they can seduce the two. Their small get together at their luxury Riviera villa turns into a night of secrets, seduction, and sexual discovery like no other. Elvira and Jack depict bisexuality perfectly as a swingers couple, having sex with each other as well as members of the same sex. When it comes to our naive newlyweds, Eddie is clearly a closeted homosexual and Betsy undoubtedly wants to be more than friends with Elvira while still maintaining an interest for the men in her life. Jack and Elvira allow these young partners to achieve a sexual liberation - regardless of sexuality.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTc1MTkzMTk4MV5BMl5BanBnXkFtZTcwNTI2NDMzMQ@@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0069969",
+            "title": "The Devil in Miss Jones",
+            "imdb_rating": 6.2,
+            "plot": "Miss Jones is tired of her life and commits suicide. She comes to a place where its decided if she will end up in Heaven or Hell. Because of her suicide she should go to Hell but she has the option to return to Earth and live life according to one of the mortal sins for some time. She picks lust and a few days of carnal pleasure follows.",
+            "poster": "https://ia.media-imdb.com/images/M/MV5BMTM1MjQ3Mzg1OF5BMl5BanBnXkFtZTcwODEyNDkyMQ@@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0072013",
+            "title": "Second Coming of Eva",
+            "imdb_rating": 5.5,
+            "plot": "Young schoolgirl Eva is beginning to become somewhat obsessed with sex, so her prudish older sister sends her off to a girls' boarding school, where she is assured that Eva will receive proper moral guidance and forget her sexual obsessions. Eva, however, discovers that the school isn't quite what her sister thinks it is.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTQ3NzgxMjYwNV5BMl5BanBnXkFtZTcwNjg2MzE3MQ@@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0072647",
+            "title": "Angel Number 9",
+            "imdb_rating": 6.3,
+            "plot": "Steven is a self-obsessed man who seduces a lot of women. When his girlfriend gets pregnant he tells her to get out of his life. After a car accident, Steven dies and comes to heaven. But his punishment is to return to Earth as Stephanie and he can only return to heaven if he can fall in love with a man just like Steven.",
+            "poster": null
+        },
+        {
+            "id": "tt0073390",
+            "title": "Felicia",
+            "imdb_rating": 5.7,
+            "plot": "Paul, a teacher and his beautiful wife Gabrielle, a professional photographer have been married for 10 years. They invite their friend's 15-year-old daughter Felicia to stay with them at their home in France while her mother recovers in a hospital in Switzerland. They discover that she is a beautiful young girl who is very unfriendly and most unhappy to stay with them. Gabrielle tries to help her enjoy herself by asking her to model for her.She becomes a very sexual model and soon both women begin to feel an overpowering desire for each other. Being a virgin she seeks sexual guidance from Gabrielle. Paul, jealous and confused about his wife's relationship, despises Felicia as she tries to seduce him as well. Eventually the young girl's sexual charms win over him and they all enjoy one last night of passion together before Felicia must return home.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMWE4OTMzNTEtMGMwMy00NjM0LTljYjgtNDdkNWU0YzZjYWUwXkEyXkFqcGdeQXVyNDYzMDMxOTc@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0073589",
+            "title": "The Image",
+            "imdb_rating": 6.2,
+            "plot": "Bored playboy Jean, while mingling amongst a group of wealthy socialites at a literary party, spots Anne, a ravishing blonde that immediately wants to know her better. Also at the party, and looking equally as bored, is Claire, an old friend of his who he approaches so that he learn more about this beautiful and mysterious blonde. He is quite surprised to find out that they are an item, as he had no idea that Clair swung that way. Turns out that Claire is the mistress of young Anne and she begins to draw Jean into her world of sadistic pleasures. Claire is a strong and powerful force, cold and cruel, while Anne's submissive nature hides a volcanic desire that hints at who is actually in charge of this relationship. Then there is Jean, who is so drab and boring that it almost hurts to watch him on screen. The nature of Claire and Anne's relationship becomes quite apparent to Jean when they visit a public garden and Claire orders Anne to steal a rose, and hide its thorny stem under her garter, then made to squat and pee right in front of him. Later Claire forces Anne to perform many sexual acts with Jean as well, adding more moments of humiliation for Anne, but when we see the twinkle in her eyes we know that she is getting more out of this than her tormentors are.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTY4OTcyMDUyNF5BMl5BanBnXkFtZTcwNzkyMjgxMQ@@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0073682",
+            "title": "Sensations",
+            "imdb_rating": 6.2,
+            "plot": "Two pretty women, Margaret and her best friend, arrive in Amsterdam to meet her boyfriend who's a photographer. They get exposed to very liberal sexual situations very soon and while conventional naive and timid Margaret isn't all that into it, her friend wants in on the action that includes lesbian and all other kinds of sex. They even witness a golden shower. Temptations of this odd sexual wonderland become harder and harder for Margaret to resist and her adventure ends in a most lustful and bizarre fashion.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTgzNTAyMzc4MV5BMl5BanBnXkFtZTYwMDU2NDU3._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0073749",
+            "title": "The Teenage Prostitution Racket",
+            "imdb_rating": 5.7,
+            "plot": "Milan, early 70s: The stories of some girls, finished or inserted in the prostitution ring, are flanked by those of their clients and some young criminals intent on exploiting them. There are six stories. In the first, a woman prostitutes her minor niece in exchange for a ride in the car. The second is the story of a young Sardinian, Rosina, who was introduced into the tour with the illusion of an honest and well-paid job. A virgin is kept such by the impeccable exploiters to raise the price. Laura, a young girl passionate about classical music, sells herself in protest against her rich family. Antonietta, a fourteen year old pregnant, is frowned upon by the exploiters. Two girls talk about their experiences and, between one client and another, they love each other, until the suicide of the younger. Finally, the woman of the beginning with her niece, are attacked at home by the exploiters, but they kill one with a stick then hide his body and leave Milan with the usual tactic of hitchhiking.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BN2MzNzVjNWEtYmMxNS00N2M0LWEzOTktNDEzMWVjZWRkODVjXkEyXkFqcGdeQXVyNTM3MDMyMDQ@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0074113",
+            "title": "Alice in Wonderland: An X-Rated Musical Fantasy",
+            "imdb_rating": 6.2,
+            "plot": "Alice is a virginal librarian, cheerful and outgoing, who acts and dresses younger than her age. She rebuffs William, a suitor, because he's insistent on behavior she considers inappropriate: she's a prude. While daydreaming about reliving her life, a white rabbit taps her on the shoulder, and she follows him to Wonderland, where playful animals and people introduce her to her imagination and to pleasure. After encounters with the imperious Queen of Hearts, Alice decides that Wonderland may not be for her, and she longs for William.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTY2OTMxNDY5MF5BMl5BanBnXkFtZTcwNjcxMjE2MQ@@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0074661",
+            "title": "In the Sign of the Lion",
+            "imdb_rating": 5.6,
+            "plot": "The year is 1934. Sisters Rosa and Soffy cannot get their book, The Almost Royal Family, published since it lacks the necessary sex appeal that readers are looking for. So they decide to throw caution to the wind and write a tell-all memoir, entitled In the Sign of the Lion, under the nom de plume \"Toni Bram\", their straight-laced nephew. In the memoir Rosa and Soffy relate their years as young women in service, together with their sister Yrsa, to the affably roguish Count Johann. Count Hubert, an intolerant prude, has inherited his cousin Johann's estate, Boholm Castle, and is shocked to learn that he may be tainted by the old ladies' recollections - given that his youthful sins have not been overlooked. Naturally, Toni is soon up to his eyeballs as the presumed author of his aunts' wildly popular erotic novel - and the maniacal Count Hubert is determined to bury the book that could ruin him.",
+            "poster": null
+        },
+        {
+            "id": "tt0074721",
+            "title": "Exquisite Pleasure",
+            "imdb_rating": 5.9,
+            "plot": "Martine, Mimi and Doris have had enough of providing for their slacker boyfriends. They decide to rent a place of their own, as well as a manservant. Soon, their newfound decadent lifestyles causes them to lose their respective jobs, and the manservant flees because of sexual harassment. Therefore the girls decide to start a private brothel.",
+            "poster": null
+        },
+        {
+            "id": "tt0075464",
+            "title": "A Change of Partners",
+            "imdb_rating": 6.3,
+            "plot": "Eric and Joelle decided to spend their honeymoon night at the house of a couple of married friends - who happen to be in the midst of a serious marriage crisis. Before sunset, a very young woman arrives riding a motorbike, and says she's Angel. With her strange presence, erotism breaks out, and several couplings and vicious sex erupt in the comfortable home.",
+            "poster": null
+        },
+        {
+            "id": "tt0075685",
+            "title": "Obsessed",
+            "imdb_rating": 6.3,
+            "plot": "A psycho stalks and violates women at gunpoint. One woman is determined to stop him.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTg4MDgwNjkxNV5BMl5BanBnXkFtZTgwMDAyNDcxMzE@._V1_SX300.jpg"
+        },
+        {
+            "id": "tt0075715",
+            "title": "Babyface",
+            "imdb_rating": 6.2,
+            "plot": "After seducing a girl, a man hides in a male brothel.",
+            "poster": null
+        }
+    ],
+    "selectedGenres": "Adventure / Action",
+    "selectedAwards": [
+        {
+            "id": 6655,
+            "year": 1990,
+            "category": "ART DIRECTION",
+            "crew_id": null,
+            "movie_id": "tt0096895",
+            "is_winner": 1
+        }
+    ],
+    "selectedActors": [
+        {
+            "character": "Vicki Vale",
+            "id": "nm0000107",
+            "name": "Kim Basinger",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Kim_Basinger_%281990%29.jpg"
+        },
+        {
+            "character": "Joker\",\"Jack Napier",
+            "id": "nm0000197",
+            "name": "Jack Nicholson",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/Jack_Nicholson_2001.jpg"
+        },
+        {
+            "character": "Batman\",\"Bruce Wayne",
+            "id": "nm0000474",
+            "name": "Michael Keaton",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Michael_Keaton_by_Gage_Skidmore.jpg"
+        },
+        {
+            "character": "Alexander Knox",
+            "id": "nm0943237",
+            "name": "Robert Wuhl",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Robert_Wuhl_1998.jpg"
+        }
+    ],
+    "selectedDirectors": [
+        {
+            "id": "nm0000318",
+            "name": "Tim Burton",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/6/68/Tim_Burton_%287587109150%29.jpg"
+        }
+    ],
+    "selectedActorAvgRating": [
+        {
+            "Avg_Rating": 6.832558139534883
+        }
+    ],
+    "selectedCrewAwards": [
+        {
+            "id": 4859,
+            "year": 1973,
+            "category": "ACTOR IN A SUPPORTING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0068646",
+            "is_winner": 0
+        },
+        {
+            "id": 4957,
+            "year": 1974,
+            "category": "ACTOR",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0070666",
+            "is_winner": 0
+        },
+        {
+            "id": 5058,
+            "year": 1975,
+            "category": "ACTOR",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0071562",
+            "is_winner": 0
+        },
+        {
+            "id": 5161,
+            "year": 1976,
+            "category": "ACTOR",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0072890",
+            "is_winner": 0
+        },
+        {
+            "id": 5582,
+            "year": 1980,
+            "category": "ACTOR IN A LEADING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": null,
+            "is_winner": 0
+        },
+        {
+            "id": 6747,
+            "year": 1991,
+            "category": "ACTOR IN A SUPPORTING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0099422",
+            "is_winner": 0
+        },
+        {
+            "id": 6954,
+            "year": 1993,
+            "category": "ACTOR IN A LEADING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0105323",
+            "is_winner": 1
+        },
+        {
+            "id": 6960,
+            "year": 1993,
+            "category": "ACTOR IN A SUPPORTING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": "tt0104348",
+            "is_winner": 0
+        },
+        {
+            "id": 10088,
+            "year": 2020,
+            "category": "ACTOR IN A SUPPORTING ROLE",
+            "crew_id": "nm0000199",
+            "movie_id": "tt1302006",
+            "is_winner": 0
+        }
+    ],
+    "selectedCrewFamous": [
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0068646",
+            "title": "The Godfather",
+            "poster": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0070666",
+            "title": "Serpico",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOTRkNjg3YzQtNGE3NC00M2U1LTg1ODItNmM3ZjMyOTYzYjEwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0072890",
+            "title": "Dog Day Afternoon",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODExZmE2ZWItYTIzOC00MzI1LTgyNTktMDBhNmFhY2Y4OTQ3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0099422",
+            "title": "Dick Tracy",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMzA5MDg5ZDAtOWE1YS00Nzg2LTk5NzUtMDY3ZDZlN2U2M2ZlXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg"
+        }
+    ],
+    "selectedActIn": [
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0067549",
+            "release_year": 1971,
+            "title": "The Panic in Needle Park",
+            "character": "Bobby",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNmQ0YTg2ZGQtMmQ1My00ZThjLWEyM2UtNjlhNDE3MDdhNjhlXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0068646",
+            "release_year": 1972,
+            "title": "The Godfather",
+            "character": "Michael Corleone",
+            "poster": "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0070666",
+            "release_year": 1973,
+            "title": "Serpico",
+            "character": "Serpico",
+            "poster": "https://m.media-amazon.com/images/M/MV5BOTRkNjg3YzQtNGE3NC00M2U1LTg1ODItNmM3ZjMyOTYzYjEwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0070643",
+            "release_year": 1973,
+            "title": "Scarecrow",
+            "character": "Lion",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTQxNmU4ZDAtNjRjMi00NTZmLWEyZWEtMzczMmM3YWViY2ZmXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0071562",
+            "release_year": 1974,
+            "title": "The Godfather Part II",
+            "character": "Michael",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMWMwMGQzZTItY2JlNC00OWZiLWIyMDctNDk2ZDQ2YjRjMWQ0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0072890",
+            "release_year": 1975,
+            "title": "Dog Day Afternoon",
+            "character": "Sonny",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODExZmE2ZWItYTIzOC00MzI1LTgyNTktMDBhNmFhY2Y4OTQ3XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0078718",
+            "release_year": 1979,
+            "title": "And Justice for All",
+            "character": "Arthur Kirkland",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmRhOTc3MzctYjc3Yi00N2I0LWFkYTktZThmYTc4ZDk5OGFiXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0080569",
+            "release_year": 1980,
+            "title": "Cruising",
+            "character": "Steve Burns",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjFmODA1NjItY2NmOS00NTczLThkMWMtMzNlZTNiNmU0NWRiXkEyXkFqcGdeQXVyNDE5MTU2MDE@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0083598",
+            "release_year": 1982,
+            "title": "Author! Author!",
+            "character": "Ivan Travalian",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNWFmOTRjYTctMTFjYy00YTcxLWJhZWYtM2JhMTZmZjI3MWYyXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0086250",
+            "release_year": 1983,
+            "title": "Scarface",
+            "character": "Tony Montana",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNjdjNGQ4NDEtNTEwYS00MTgxLTliYzQtYzE2ZDRiZjFhZmNlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0089913",
+            "release_year": 1985,
+            "title": "Revolution",
+            "character": "Tom Dobb",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzI3YjdiYzUtMmZmMy00NTFlLWJlZmQtMTNkZDU1YjYyNGRlXkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0098273",
+            "release_year": 1989,
+            "title": "Sea of Love",
+            "character": "Frank Keller",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjk5MTY0NTYtZTgzMi00NjVlLTk5ZWUtZWNmODUyYTkyNTQ0XkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0099422",
+            "release_year": 1990,
+            "title": "Dick Tracy",
+            "character": "Big Boy Caprice",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMzA5MDg5ZDAtOWE1YS00Nzg2LTk5NzUtMDY3ZDZlN2U2M2ZlXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0099674",
+            "release_year": 1990,
+            "title": "The Godfather Part III",
+            "character": "Michael Corleone",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNWFlYWY2YjYtNjdhNi00MzVlLTg2MTMtMWExNzg4NmM5NmEzXkEyXkFqcGdeQXVyMDk5Mzc5MQ@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0101912",
+            "release_year": 1991,
+            "title": "Frankie and Johnny",
+            "character": "Johnny",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzdiNjQzOWMtNGE3YS00YzUxLWI2MWYtYjhjMmE1ODA0YWNlXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0104348",
+            "release_year": 1992,
+            "title": "Glengarry Glen Ross",
+            "character": "Ricky Roma",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNTYzN2MxODMtMDBhOC00Y2M0LTgzMTItMzQ4NDIyYWIwMDEzL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTc1NTQxODI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0105323",
+            "release_year": 1992,
+            "title": "Scent of a Woman",
+            "character": "Lt. Col. Frank Slade",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZTM3ZjA3NTctZThkYy00ODYyLTk2ZjItZmE0MmZlMTk3YjQwXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0106519",
+            "release_year": 1993,
+            "title": "Carlito's Way",
+            "character": "Carlito",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzBhY2E0OWYtYzRmNC00ZGY3LTllODYtNTExM2FmYTFkMGUwXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0113277",
+            "release_year": 1995,
+            "title": "Heat",
+            "character": "Lt. Vincent Hanna",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYjZjNTJlZGUtZTE1Ny00ZDc4LTgwYjUtMzk0NDgwYzZjYTk1XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0115907",
+            "release_year": 1996,
+            "title": "City Hall",
+            "character": "Mayor John Pappas",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmMxMGEwNDAtZGVjYS00NWIyLWI4NGQtZGYzMjA0YzIzZGM4XkEyXkFqcGdeQXVyMTUzMDUzNTI3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0119008",
+            "release_year": 1997,
+            "title": "Donnie Brasco",
+            "character": "Lefty",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzMzMDZkYWEtODIzNS00YjI3LTkxNTktOWEyZGM3ZWI2MWM4XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0118971",
+            "release_year": 1997,
+            "title": "The Devil's Advocate",
+            "character": "John Milton",
+            "poster": "https://m.media-amazon.com/images/M/MV5BM2M2MDJhMDgtMmJkYy00MTgzLTkyZTktODM5NzE1MWUyNDA4XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0140352",
+            "release_year": 1999,
+            "title": "The Insider",
+            "character": "Lowell Bergman",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODg0YjAzNDQtOGFkMi00Yzk2LTg1NzYtYTNjY2UwZTM2ZDdkL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0146838",
+            "release_year": 1999,
+            "title": "Any Given Sunday",
+            "character": "Tony D'Amato",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZDk2YTQxZjUtYzJkYi00MTk4LTk4NDAtZmQ3ZGQwMDQxY2ZjXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0118852",
+            "release_year": 2000,
+            "title": "Chinese Coffee",
+            "character": "Harry Levine",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYWExZTkzZmYtODg0ZS00OGFjLWFlY2ItOTliNWZkOTA0NDRiXkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0258153",
+            "release_year": 2002,
+            "title": "S1m0ne",
+            "character": "Viktor Taransky",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNjZmNjhjMGUtYmNmYi00MGYyLTk0YTItOWM4MmVmMDIwNmU3XkEyXkFqcGdeQXVyNjUwNzk3NDc@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0278504",
+            "release_year": 2002,
+            "title": "Insomnia",
+            "character": "Will Dormer",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzlkZTEyYjUtMTY5NS00ZjU0LTk5OTYtM2M0ZDg1NmNjMzhkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0292506",
+            "release_year": 2003,
+            "title": "The Recruit",
+            "character": "Walter Burke",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjE5MDMzOTk3MV5BMl5BanBnXkFtZTYwNTE0NTg2._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0379889",
+            "release_year": 2004,
+            "title": "The Merchant of Venice",
+            "character": "Shylock",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMGJiNGUxZGYtM2U2YS00ZjJlLThlNjQtYTVkNWUxZGRmYTk4XkEyXkFqcGdeQXVyMTMxMTY0OTQ@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0417217",
+            "release_year": 2005,
+            "title": "Two for the Money",
+            "character": "Walter",
+            "poster": "https://m.media-amazon.com/images/M/MV5BODAzOTAzNzkyNl5BMl5BanBnXkFtZTYwMTAzNjM3._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0411061",
+            "release_year": 2007,
+            "title": "88 Minutes",
+            "character": "Jack Gramm",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTgxOTg1NzgzMV5BMl5BanBnXkFtZTcwNTM3Mjc1MQ@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt1034331",
+            "release_year": 2008,
+            "title": "Righteous Kill",
+            "character": "Rooster",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTYwMjg3MjY3OV5BMl5BanBnXkFtZTcwNTc4MDU3MQ@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt0810913",
+            "release_year": 2011,
+            "title": "Jack and Jill",
+            "character": "Al Pacino",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNjczMTU5OTUyMl5BMl5BanBnXkFtZTcwODEzNjc3Ng@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt1535612",
+            "release_year": 2011,
+            "title": "The Son of No One",
+            "character": "Detective Charles Stanford",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNDUzNDc3OTI3NV5BMl5BanBnXkFtZTcwMDQ3OTQ2Ng@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt1389096",
+            "release_year": 2012,
+            "title": "Stand Up Guys",
+            "character": "Val",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTgwNjgyOTExMV5BMl5BanBnXkFtZTcwNTIzODA1OA@@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt2893490",
+            "release_year": 2014,
+            "title": "Manglehorn",
+            "character": "Manglehorn",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMzMwMzE2MjUzNF5BMl5BanBnXkFtZTgwMzMwNDQ3NTE@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt1772288",
+            "release_year": 2015,
+            "title": "Danny Collins",
+            "character": "Danny Collins",
+            "poster": "https://m.media-amazon.com/images/M/MV5BNDk5NTYxOTk2MV5BMl5BanBnXkFtZTgwMzIxMjE0MzE@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt3658772",
+            "release_year": 2016,
+            "title": "Misconduct",
+            "character": "Charles Abrams",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTQ5NzcwNTM3OV5BMl5BanBnXkFtZTgwMDM3NTA1NzE@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt3011960",
+            "release_year": 2017,
+            "title": "Hangman",
+            "character": "Ray Archer",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMTUyODA0Njc4Nl5BMl5BanBnXkFtZTgwMTU5MDU5MzI@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt5126922",
+            "release_year": 2017,
+            "title": "The Pirates of Somalia",
+            "character": "Seymour Tolbin",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMjA2OTIwNjA0NV5BMl5BanBnXkFtZTgwMDYxNTYxNDM@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt1302006",
+            "release_year": 2019,
+            "title": "The Irishman",
+            "character": "Jimmy Hoffa",
+            "poster": "https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt11214590",
+            "release_year": 2021,
+            "title": "House of Gucci",
+            "character": "Aldo Gucci",
+            "poster": "https://m.media-amazon.com/images/M/MV5BYzdlMTMyZWQtZWNmMC00MTJiLWIyMWMtM2ZlZDdlYzZhNTc0XkEyXkFqcGdeQXVyMTMzNDE5NDM2._V1_SX300.jpg"
+        },
+        {
+            "crew_id": "nm0000199",
+            "movie_id": "tt7050946",
+            "release_year": 2021,
+            "title": "American Traitor: The Trial of Axis Sally",
+            "character": "James J. Laughlin",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmU3YzVkNWMtZTg0Ni00Yjk3LWFhMjgtMDc3ODIxYTNlNGM2XkEyXkFqcGdeQXVyMTEyNDk3MjY3._V1_SX300.jpg"
+        }
+    ],
+    "selectedDuo": [
+        {
+            "crew_id": "nm0000134",
+            "name": "Robert De Niro",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Robert_De_Niro_2011_Shankbone.JPG",
+            "co_time": 4,
+            "winning": 2,
+            "nomination": 5
+        },
+        {
+            "crew_id": "nm0000473",
+            "name": "Diane Keaton",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Diane_Keaton_2012-1_%28cropped%29.jpg",
+            "co_time": 3,
+            "winning": 1,
+            "nomination": 3
+        },
+        {
+            "crew_id": "nm0000273",
+            "name": "Alan Arkin",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/AlanArkinTIFFSept2012_%28cropped%29.jpg",
+            "co_time": 2,
+            "winning": 1,
+            "nomination": 3
+        }
+    ],
+    "selectedCo": [
+        {
+            "crew_id": "nm0000008",
+            "name": "Marlon Brando",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Marlon_Brando_publicity_for_One-Eyed_Jacks.png",
+            "co_time": 1,
+            "winning": 2,
+            "nomination": 6
+        },
+        {
+            "crew_id": "nm0000493",
+            "name": "Jack Lemmon",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Jack_Lemmon_-_1968.jpg",
+            "co_time": 1,
+            "winning": 2,
+            "nomination": 6
+        },
+        {
+            "crew_id": "nm0000134",
+            "name": "Robert De Niro",
+            "photo_url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Robert_De_Niro_2011_Shankbone.JPG",
+            "co_time": 4,
+            "winning": 2,
+            "nomination": 5
+        }
+    ]
+}
