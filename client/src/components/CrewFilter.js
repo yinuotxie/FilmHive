@@ -45,6 +45,7 @@ const CrewFilter = ({ onFiltersChange }) => {
       awarded: awarded,
       nominated: nominated,
     }
+
     onFiltersChange(updatedFilters)
   }
 

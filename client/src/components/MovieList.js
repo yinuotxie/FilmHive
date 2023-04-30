@@ -173,7 +173,7 @@ const MovieList = ({ filters }) => {
               backgroundPosition: 'center',
               backgroundColor: 'rgba(0, 0, 0, 0.2)',
             }}>
-            <Typography.Title level={4}>{totalMovies} movies found.</Typography.Title>
+            <Typography.Title level={4}>{totalMovies} movie(s) found.</Typography.Title>
           </div>
           {totalMovies > 0 &&
             <>

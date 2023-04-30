@@ -1,11 +1,9 @@
-import CrewFilter from "@/components/CrewFilter"
-import DirectorList from "@/components/DirectorList"
+import DirectorPage from "@/components/DirectorPage"
 
 function Director () {
   return (
-    <div>
-      <CrewFilter />
-      <DirectorList />
+    <div style={{ justifyContent: 'center' }}>
+      <DirectorPage />
     </div>
   )
 }

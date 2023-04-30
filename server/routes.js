@@ -189,7 +189,7 @@ const allActors = async function (req, res) {
       FROM ActIn AI Join Movies M on AI.movie_id = M.id
       GROUP BY crew_id
   )
-  SELECT DISTINCT C.id, C.name, C.photo_url, C.profession
+  SELECT DISTINCT C.id, C.name, C.photo_url, C.profession, C.birth_date, C.death_year, AR.avg_rating
   FROM Crews C
   JOIN ActorRatings AR on C.id = AR.crew_id
   `
@@ -230,8 +230,6 @@ const allActors = async function (req, res) {
     params.push(limit, offset)
 
     const [results] = await pool.query(query, params)
-    console.log(query)
-    console.log(params)
 
     res.status(200).json({ actors: results, total: total })
   } catch (err) {
@@ -246,15 +244,67 @@ const allDirectors = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
   const offset = parseInt(req.query.offset || 0)
+  const searchValue = req.query.searchValue || ''
+  const ratingMin = parseFloat(req.query.ratingMin) || 0
+  const ratingMax = parseFloat(req.query.ratingMax) || 10
+  const birthYearMin = parseInt(req.query.birthYearMin) || 1830
+  const birthYearMax = parseInt(req.query.birthYearMax) || 2020
+  const awarded = req.query.awarded === 'true' ? 1 : 0
+  const nominated = req.query.nominated === 'true' ? 1 : 0
 
   try {
-    const [results] = await pool.query(`SELECT COUNT(*) as total FROM Crews WHERE profession LIKE '%director%'`)
-    const total = results[0].total
-    const [rows] = await pool.query(`SELECT * FROM Crews WHERE profession LIKE '%director%' LIMIT ? OFFSET ?`, [limit, offset])
-    res.status(200).json({ directors: rows, total: total })
+    let query = `
+    WITH DirectorRating AS (
+      SELECT crew_id, AVG(M.imdb_rating) AS avg_rating
+      FROM Direct D Join Movies M on D.movie_id = M.id
+      GROUP BY crew_id
+  )
+  SELECT DISTINCT C.id, C.name, C.photo_url, C.profession, C.birth_date, C.death_year, AR.avg_rating
+  FROM Crews C
+  JOIN DirectorRating AR on C.id = AR.crew_id
+  `
+    if (awarded || nominated) {
+      query += ` JOIN OscarAwards OA on C.id = OA.crew_id`
+    }
+
+    query += ` WHERE AR.avg_rating >= ? AND AR.avg_rating <= ?
+    AND C.birth_year >= ? AND C.birth_year <= ?
+    `
+
+    const params = [ratingMin, ratingMax, birthYearMin, birthYearMax]
+
+    if (searchValue) {
+      query += ` AND C.name LIKE ?`
+      params.push(`%${searchValue}%`)
+    }
+
+    if (awarded) {
+      query += ` AND OA.is_winner >= 1`
+    }
+
+    if (nominated) {
+      query += ` AND OA.is_winner >= 0`
+    }
+
+    query += ` AND (C.profession LIKE '%director%')`
+
+    let total = 0
+    if (searchValue || ratingMin || ratingMax !== 10 || birthYearMin !== 1830 || birthYearMax !== 2020 || awarded || nominated) {
+      const [temp] = await pool.query(query, params)
+      total = temp.length
+    } else {
+      total = 18250
+    }
+
+    query += ' LIMIT ? OFFSET ?'
+    params.push(limit, offset)
+
+    const [results] = await pool.query(query, params)
+
+    res.status(200).json({ directors: results, total: total })
   } catch (err) {
     console.log(err)
-    res.status(500).send('Error retrieving actors from database')
+    res.status(500).send('Error retrieving directors from database')
   }
 }
 
@@ -495,31 +545,6 @@ const selectedDirectors = async function (req, res) {
   }
 }
 
-
-// selected actor's average rating
-const selectedActorAvgRaing = async function (req, res) {
-
-  const actor_id = req.query.crew_id
-
-  try {
-    let query = `
-    WITH AllMovie AS (
-        SELECT A.movie_id, M.imdb_rating
-        FROM ActIn A
-        JOIN Movies M on A.movie_id = M.id
-        WHERE crew_id=?
-    )
-    SELECT AVG(imdb_rating) AS Avg_Rating
-    FROM AllMovie
-  `
-    const results = await pool.query(query, [actor_id])
-    res.json(results[0])
-  } catch (err) {
-    console.error(err.message)
-    res.status(500).json({ error: 'Server error' })
-  }
-}
-
 // selected crew's awards
 const selectedCrewAwards = async function (req, res) {
 
@@ -688,6 +713,28 @@ const selectedCo = async function (req, res) {
   }
 }
 
+// selected crew direct
+const selectedDirect = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+    SELECT D.crew_id, D.movie_id, M.release_year, M.title, M.poster
+    FROM Direct D
+    JOIN Movies M on D.movie_id = M.id
+    WHERE crew_id=?
+    ORDER BY release_year
+  `
+    const results = await pool.query(query, [crew_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
 
 module.exports = {
   register,
@@ -703,10 +750,10 @@ module.exports = {
   selectedAwards,
   selectedActors,
   selectedDirectors,
-  selectedActorAvgRaing,
   selectedCrewAwards,
   selectedCrewFamous,
   selectedActIn,
   selectedDuo,
-  selectedCo
+  selectedCo,
+  selectedDirect
 }

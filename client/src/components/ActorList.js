@@ -18,13 +18,11 @@ const ActorList = ({ filters }) => {
   const [selectedAwards, setSelectedAwards] = useState('')
   const [selectedFamousFor, setSelectedFamousFor] = useState('')
   const [selectedActIn, setSelectedActIn] = useState('')
-  const [selectedRating, setSelectedRating] = useState('')
   const [selectedDuo, setSelectedDuo] = useState('')
   const [selectedCo, setSelectedCo] = useState('')
 
   useEffect(() => {
 
-    console.log(filters)
     const offset = (currentPage - 1) * actorsPerPage
 
     const params = {
@@ -62,7 +60,7 @@ const ActorList = ({ filters }) => {
 
     axios.get(`http://${config.server_host}:${config.server_port}/allactors`, { params })
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setActors(response.data.actors)
         setTotalActors(response.data.total)
       }).catch((error) => {
@@ -85,13 +83,6 @@ const ActorList = ({ filters }) => {
       const params = {
         crew_id: selectedActor.id
       }
-
-      axios.get(`http://${config.server_host}:${config.server_port}/selectedactoravgrating`, { params })
-        .then((response) => {
-          setSelectedRating(response.data[0].Avg_Rating)
-        }).catch((error) => {
-          console.log(error)
-        })
 
       axios.get(`http://${config.server_host}:${config.server_port}/selectedcrewawards`, { params })
         .then((response) => {
@@ -135,9 +126,6 @@ const ActorList = ({ filters }) => {
     }
   }, [selectedActor])
 
-
-
-
   const handleActorsPerPageChange = (currentPage, size) => {
     setCurrentPage(1)
     setActorsPerPage(size)
@@ -174,7 +162,7 @@ const ActorList = ({ filters }) => {
               backgroundPosition: 'center',
               backgroundColor: 'rgba(0, 0, 0, 0.2)',
             }}>
-            <Typography.Title level={4}>{totalActors} actors found.</Typography.Title>
+            <Typography.Title level={4}>{totalActors} actor(s) found.</Typography.Title>
           </div>
           {totalActors > 0 &&
             <>
@@ -249,7 +237,7 @@ const ActorList = ({ filters }) => {
                     <Typography.Title level={5} style={{ display: "inline-block" }}>Profession(s):</Typography.Title> {selectedActor.profession.split(',').map((item) => item.trim()).join(' / ')}
                     <br />
                     <br />
-                    <Typography.Title level={5} style={{ display: "inline-block" }}>Average Movies Rating:</Typography.Title> {parseFloat(selectedRating).toFixed(2)} / 10.00
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Average Rating of Movies Portrayed:</Typography.Title> {parseFloat(selectedActor.avg_rating).toFixed(2)} / 10.00
                     <br />
                     <br />
                     {selectedAwards && <>
