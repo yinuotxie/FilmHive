@@ -21,6 +21,16 @@ app.get("/selectedgenres", routes.selectedGenres)
 app.get("/selectedawards", routes.selectedAwards)
 app.get("/selectedactors", routes.selectedActors)
 app.get("/selecteddirectors", routes.selectedDirectors)
+app.get("/selectedactoravgrating", routes.selectedActorAvgRaing)
+app.get("/selectedcrewawards", routes.selectedCrewAwards)
+app.get("/selectedcrewfamous", routes.selectedCrewFamous)
+app.get("/selectedactin", routes.selectedActIn)
+app.get("/selectedduo", routes.selectedDuo)
+app.get("/selectedco", routes.selectedCo)
+
+
+
+
 
 app.listen(config.server_port, () => {
   console.log(`Server running at http://${config.server_host}:${config.server_port}/`)

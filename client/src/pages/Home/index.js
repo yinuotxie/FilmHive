@@ -4,7 +4,7 @@ import LatestMovies from "@/components/LatestMovies"
 import UpComing from "@/components/UpComing"
 import News from "@/components/News"
 import SearchBar from "@/components/SearchBar"
-import { Row, Col } from 'antd'
+import { Row } from 'antd'
 
 function Home () {
   return (

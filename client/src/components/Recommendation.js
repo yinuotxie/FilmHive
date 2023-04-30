@@ -40,7 +40,7 @@ const Reccomendation = () => {
       <Typography.Title level={4}>We selected 10 movies base on your preferences, and their ratings are all higher than the average ratings in each genre. Enjoy!</Typography.Title>
       <br />
       {movies.length === 0 ? (
-        <Spin tip="Just give me one sec!" size="large" />
+        <Spin tip="Data on its way!" size="large" />
       ) : (
         <>
           <Row gutter={12} style={{ marginTop: 16, display: 'flex', justifyContent: 'center' }}>

@@ -153,7 +153,7 @@ const allMovies = async function (req, res) {
       const [temp] = await pool.query(query, params)
       total = temp.length
     } else {
-      total = 108898
+      total = 108836
     }
 
     query += ' LIMIT ? OFFSET ?'
@@ -381,7 +381,7 @@ const selectedGenres = async function (req, res) {
 }
 
 
-// selected movie's genres
+// selected movie's awards
 const selectedAwards = async function (req, res) {
 
   const movie_id = req.query.movie_id
@@ -436,10 +436,202 @@ const selectedDirectors = async function (req, res) {
       WHERE Direct.movie_id = ?;
     `
     const results = await pool.query(query, [movie_id])
-    console.log('results[0]')
-
     console.log(results[0])
 
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// selected actor's average rating
+const selectedActorAvgRaing = async function (req, res) {
+
+  const actor_id = req.query.crew_id
+
+  try {
+    let query = `
+    WITH AllMovie AS (
+        SELECT A.movie_id, M.imdb_rating
+        FROM ActIn A
+        JOIN Movies M on A.movie_id = M.id
+        WHERE crew_id=?
+    )
+    SELECT AVG(imdb_rating) AS Avg_Rating
+    FROM AllMovie
+  `
+    const results = await pool.query(query, [actor_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+// selected crew's awards
+const selectedCrewAwards = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+      SELECT *
+      FROM OscarAwards
+      WHERE crew_id = ?
+    `
+    const results = await pool.query(query, [crew_id])
+    res.json(results[0])
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+// selected crew is famous for
+const selectedCrewFamous = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+    SELECT F.crew_id, F.movie_id, M.title, M.poster
+    FROM FamousFor F
+    JOIN Movies M on F.movie_id = M.id
+    WHERE crew_id=?
+  `
+    const results = await pool.query(query, [crew_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+// selected crew act in
+const selectedActIn = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+    SELECT A.crew_id, A.movie_id, M.release_year, M.title, A.character, M.poster
+    FROM ActIn A
+    JOIN Movies M on A.movie_id = M.id
+    WHERE crew_id=?
+    ORDER BY release_year
+  `
+    const results = await pool.query(query, [crew_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// golden partner of selected crew
+const selectedDuo = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+    WITH CoStar AS (
+        (SELECT AI.crew_id
+          FROM ActIn A
+          JOIN Movies M on A.movie_id = M.id
+          JOIN ActIn AI on M.id = AI.movie_id
+          WHERE A.crew_id=?
+          AND A.crew_id <> AI.crew_id
+        )
+        UNION ALL
+        (SELECT DI.crew_id
+          FROM Direct D
+          JOIN Movies M on D.movie_id = M.id
+          JOIN Direct DI on M.id = DI.movie_id
+          WHERE D.crew_id=?
+          AND D.crew_id <> DI.crew_id
+        )
+    ),
+    CoTime AS(
+        SELECT crew_id, COUNT(*) AS co_time
+        FROM CoStar
+        GROUP BY crew_id
+    ),
+    Ordering AS (
+        SELECT c.crew_id, c.co_time,
+        SUM(CASE is_winner WHEN 1 THEN 1 ELSE 0 END) AS winning,
+        SUM(CASE is_winner WHEN 0 THEN 1 ELSE 0 END) AS nomination
+        FROM CoTime c
+        LEFT JOIN OscarAwards o
+        ON c.crew_id=o.crew_id
+        GROUP BY c.crew_id
+        ORDER BY co_time DESC, winning DESC, nomination DESC
+    )
+    SELECT Ordering.crew_id, Crews.name, Crews.photo_url, co_time, winning, nomination
+    FROM Ordering
+    JOIN Crews ON Ordering.crew_id = Crews.id
+    LIMIT 3
+  `
+    const results = await pool.query(query, [crew_id, crew_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// famous co-worker of selected crew
+const selectedCo = async function (req, res) {
+
+  const crew_id = req.query.crew_id
+
+  try {
+    let query = `
+    WITH CoStar AS (
+        (SELECT AI.crew_id
+        FROM ActIn A
+        JOIN Movies M on A.movie_id = M.id
+        JOIN ActIn AI on M.id = AI.movie_id
+        WHERE A.crew_id=?
+        AND A.crew_id <> AI.crew_id)
+        UNION ALL
+        (SELECT DI.crew_id
+        FROM Direct D
+        JOIN Movies M on D.movie_id = M.id
+        JOIN Direct DI on M.id = DI.movie_id
+        WHERE D.crew_id=?
+        AND D.crew_id <> DI.crew_id)
+    ),
+    CoTime AS(
+        SELECT crew_id, COUNT(*) AS co_time
+        FROM CoStar
+        GROUP BY crew_id
+    ),
+    Ordering AS (
+        SELECT c.crew_id, c.co_time,
+        SUM(CASE is_winner WHEN 1 THEN 1 ELSE 0 END) AS winning,
+        SUM(CASE is_winner WHEN 0 THEN 1 ELSE 0 END) AS nomination
+        FROM CoTime c
+        LEFT JOIN OscarAwards o
+        ON c.crew_id=o.crew_id
+        GROUP BY c.crew_id
+        ORDER BY winning DESC, nomination DESC
+    )
+    SELECT Ordering.crew_id, Crews.name, Crews.photo_url, co_time, winning, nomination
+    FROM Ordering
+    JOIN Crews ON Ordering.crew_id = Crews.id
+    LIMIT 3
+  `
+    const results = await pool.query(query, [crew_id, crew_id])
     res.json(results[0])
 
   } catch (err) {
@@ -462,5 +654,11 @@ module.exports = {
   selectedGenres,
   selectedAwards,
   selectedActors,
-  selectedDirectors
+  selectedDirectors,
+  selectedActorAvgRaing,
+  selectedCrewAwards,
+  selectedCrewFamous,
+  selectedActIn,
+  selectedDuo,
+  selectedCo
 }

@@ -112,21 +112,7 @@ const MovieList = ({ filters }) => {
       axios.get(`http://${config.server_host}:${config.server_port}/selectedawards`, { params })
         .then((response) => {
           if (response.data.length > 0) {
-            // const uniqueAwardsByYear = response.data.reduce((acc, award) => {
-            //   const { year, category, is_winner } = award
-            //   const existingCategories = acc[year] || new Set()
-            //   existingCategories.add(category)
-            //   acc[year] = existingCategories
-            //   return acc
-            // }, {})
-
-            // const result = Object.entries(uniqueAwardsByYear).map(([year, categories]) => ({
-            //   year: Number(year),
-            //   category: [...categories].join(" / ")
-            // }))
-            // setSelectedAwards(result)
             setSelectedAwards(response.data)
-            console.log(response.data)
           }
           else {
             setSelectedAwards('')
@@ -209,7 +195,7 @@ const MovieList = ({ filters }) => {
                     key={movie.id}
                     hoverable
                     style={{ width: 300, margin: '10px' }}
-                    cover={<img alt="movie poster" src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                    cover={<img alt="movie poster" src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} width={300} height={390} />}
                     onClick={() => showModal(movie)}
                   >
                     <Meta title={movie.title} />
@@ -247,7 +233,7 @@ const MovieList = ({ filters }) => {
                 <img
                   alt="movie poster"
                   src={selectedMovie.poster ? selectedMovie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='}
-                  style={{ maxWidth: '100%' }}
+                  width={300} height={390}
                 />
                 <div style={{ marginLeft: '100px' }}>
                   <p>
@@ -275,7 +261,7 @@ const MovieList = ({ filters }) => {
                       <br />
                       {selectedAwards && selectedAwards.sort((a, b) => b.is_winner - a.is_winner).map((award) => (
                         <div key={award.id}>
-                          <Typography.Text>{award.year} - {award.category}</Typography.Text>
+                          <Typography.Text>{award.year} - BEST {award.category}</Typography.Text>
                           <Typography.Text type={award.is_winner ? "success" : "secondary"}> ({award.is_winner ? "Winner" : "Nominee"})</Typography.Text>
                         </div>
                       ))}
@@ -297,10 +283,10 @@ const MovieList = ({ filters }) => {
                       key={director.id}
                       hoverable
                       style={{ width: 300, margin: '10px' }}
-                      cover={<img alt={director.name} src={director.photo_url ? director.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                      cover={<img alt={director.name} src={director.photo_url ? director.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} width={300} height={390} />}
                     >
                       <Meta title={director.name} />
-                      <br />director
+                      <br />
                     </Card>
                   ))}
                 </div>
@@ -315,7 +301,7 @@ const MovieList = ({ filters }) => {
                       key={actor.id}
                       hoverable
                       style={{ width: 300, margin: '10px' }}
-                      cover={<img alt={actor.name} src={actor.photo_url ? actor.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                      cover={<img alt={actor.name} src={actor.photo_url ? actor.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} width={300} height={390} />}
                     >
                       <Meta title={actor.name} />
                       <br />
