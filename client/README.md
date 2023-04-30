@@ -32,7 +32,7 @@ Given enough time, the following features may also be implemented:
 The website will have the following pages:
 
 - Homepage: The homepage will provide user information, movie of the day, recommendations, and possibly highlight the latest trends and most popular - - movies, news, and articles.
-- Movie listing page: This page will display a comprehensive list of movies, which can be sorted by various categories such as genre, year, country, and popularity.
+- Movie listing page: This page will display a comprehensive list of movies, which can be sorted by various categories such as genre, year, region, and popularity.
 - Movie detail page: Each movie will have its own dedicated page with detailed information about the poster, cast, introduction, director, awards, ratings, (user reviews/ratings), etc.
 - Actor detail page: Each actor will have their own dedicated page with detailed information about themselves.
 - Director detail page: Each director will have their own dedicated page with detailed information about themselves.

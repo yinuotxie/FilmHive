@@ -5,7 +5,7 @@ import MovieList from './MovieList'
 const MoviePage = () => {
   const [selectedFilters, setSelectedFilters] = useState({
     genre: '',
-    country: '',
+    region: '',
     runtime: 0,
     rating: 0,
     releaseYear: 0,
