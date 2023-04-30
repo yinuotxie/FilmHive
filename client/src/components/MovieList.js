@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Pagination, Modal, Typography, Spin } from 'antd'
+import { Card, Pagination, Modal, Typography, Spin, Avatar, List, Tag } from 'antd'
+import { LikeTwoTone, DislikeTwoTone } from '@ant-design/icons'
 import axios from 'axios'
 
 const config = require('../config.json')
@@ -20,6 +21,7 @@ const MovieList = ({ filters }) => {
 
   const [selectedActors, setSelectedActors] = useState('')
   const [selectedDirectors, setSelectedDirectors] = useState('')
+  const [selectedComments, setSelectedComments] = useState('')
 
   useEffect(() => {
     const offset = (currentPage - 1) * moviesPerPage
@@ -131,6 +133,13 @@ const MovieList = ({ filters }) => {
       axios.get(`http://${config.server_host}:${config.server_port}/selecteddirectors`, { params })
         .then((response) => {
           setSelectedDirectors(response.data)
+        }).catch((error) => {
+          console.log(error)
+        })
+
+      axios.get(`http://${config.server_host}:${config.server_port}/selectedcomments`, { params })
+        .then((response) => {
+          setSelectedComments(response.data)
         }).catch((error) => {
           console.log(error)
         })
@@ -311,6 +320,38 @@ const MovieList = ({ filters }) => {
                     </Card>
                   ))}
                 </div>
+                <br />
+              </>
+              )}
+              {selectedComments && (<>
+                <Typography.Title level={4}>{selectedComments.length} Comments:</Typography.Title>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={selectedComments}
+                  renderItem={(item, index) => (
+                    <List.Item>
+                      <List.Item.Meta
+                        avatar={<Avatar src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`} />}
+                        title={
+                          <span>
+                            {item.name}
+                            {item.top_critic === 1 && <Tag style={{ marginLeft: '5px' }} color="gold">Top Critic</Tag>}
+                          </span>
+                        }
+                        description={
+                          <span>
+                            {item.publisher_name && <span> From {item.publisher_name}</span>}
+                            {item.create_time && <span> posted on {item.create_time.match(/^\d{4}-\d{2}-\d{2}/)[0]}</span>}
+                          </span>
+                        }
+                      />
+                      <Typography.Text>{item.type === 'Fresh' ? <LikeTwoTone /> : <DislikeTwoTone />}</Typography.Text>
+                      <Typography.Text type={item.type === 'Fresh' ? "success" : "secondary"}> {item.type} </Typography.Text>
+                      <br />
+                      {item.content}
+                    </List.Item>
+                  )}
+                />
               </>
               )}
             </Modal>

@@ -32,6 +32,7 @@ const UpComing = () => {
 
   return (
     <div style={{
+      width: '100%',
       marginBottom: 10,
       border: '2px solid #ccc',
       borderRadius: 5,

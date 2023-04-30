@@ -27,6 +27,8 @@ app.get("/selectedactin", routes.selectedActIn)
 app.get("/selectedduo", routes.selectedDuo)
 app.get("/selectedco", routes.selectedCo)
 app.get("/selecteddirect", routes.selectedDirect)
+app.get("/selectedcomments", routes.selectedComments)
+
 
 
 app.listen(config.server_port, () => {

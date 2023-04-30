@@ -25,7 +25,7 @@ const Reccomendation = () => {
 
   return (
     <div style={{
-      width: 2000,
+      width: '100%',
       marginBottom: 10,
       border: '2px solid #ccc',
       borderRadius: 5,
@@ -45,7 +45,7 @@ const Reccomendation = () => {
         <>
           <Row gutter={12} style={{ marginTop: 16, display: 'flex', justifyContent: 'center' }}>
             {movies.map((movie) => (
-              <Col span={3} key={movie.title} style={{ marginLeft: `20px` }}>
+              <Col span={3} key={movie.title} style={{ marginLeft: `20px`, marginTop: `10px` }}>
                 <Card
                   hoverable
                   cover={<img alt={movie.title} src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
@@ -53,7 +53,7 @@ const Reccomendation = () => {
                   <Card.Meta title={movie.title} />
                   <br />
                   <p>Rating:{movie.imdb_rating}</p>
-                  <p>{movie.plot ? movie.plot.substring(0, 500) : 'No overview available'}</p>
+                  <p>{movie.plot ? movie.plot.substring(0, 100) : 'No overview available'}</p>
                 </Card>
               </Col>
             ))}

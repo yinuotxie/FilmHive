@@ -736,6 +736,31 @@ const selectedDirect = async function (req, res) {
 }
 
 
+// selected crew direct
+const selectedComments = async function (req, res) {
+
+  const movie_id = req.query.movie_id
+
+  try {
+    let query = `
+    SELECT r.content, r.type, r.create_time, c.name, c.top_critic, c.publisher_name
+    FROM Movies m
+    JOIN Comments cm ON cm.movie_id = m.id
+    JOIN Critics c ON cm.critic_id = c.id
+    JOIN Reviews r ON cm.review_id = r.review_id
+    WHERE m.id = ?
+    ORDER BY c.top_critic DESC, r.create_time DESC
+  `
+    const results = await pool.query(query, [movie_id])
+    console.log(results[0])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -755,5 +780,6 @@ module.exports = {
   selectedActIn,
   selectedDuo,
   selectedCo,
-  selectedDirect
+  selectedDirect,
+  selectedComments
 }
