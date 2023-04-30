@@ -70,26 +70,19 @@ const register = async function (req, res) {
 const login = async function (req, res) {
 
   const email = req.query.email
-  const password = req.query.password
 
-  try {
-    let query = `
+  connection.query(`
     SELECT *
     FROM Users
-    WHERE email = '${email}' AND password = '${password}'
-  `
-    const [results] = await pool.query(query, [email, password])
-
-    if (results.length === 0) {
-      return res.status(401).json({ message: 'Invalid email or password' })
+    WHERE email = '${email}'
+  `, (err, data) => {
+    if (err || data.length === 0) {
+      console.log(err)
+      res.status(401).json({ message: 'Invalid email or password' })
     } else {
-      return res.status(200).json(results[0])
+      res.json(data)
     }
-  } catch (error) {
-    console.error(error)
-    res.sendStatus(500)
-  }
-
+  })
 }
 
 
