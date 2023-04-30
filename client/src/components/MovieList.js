@@ -335,7 +335,7 @@ const MovieList = ({ filters }) => {
                         title={
                           <span>
                             {item.name}
-                            {item.top_critic === 1 && <Tag style={{ marginLeft: '5px' }} color="gold">Top Critic</Tag>}
+                            {item.top_critic === 1 && <Tag style={{ marginLeft: '5px' }} color="blue">Top Critic</Tag>}
                           </span>
                         }
                         description={
@@ -345,7 +345,7 @@ const MovieList = ({ filters }) => {
                           </span>
                         }
                       />
-                      <Typography.Text>{item.type === 'Fresh' ? <LikeTwoTone /> : <DislikeTwoTone />}</Typography.Text>
+                      <Typography.Text>{item.type === 'Fresh' ? <LikeTwoTone twoToneColor="#00FF00" /> : <DislikeTwoTone twoToneColor="#808080" />}</Typography.Text>
                       <Typography.Text type={item.type === 'Fresh' ? "success" : "secondary"}> {item.type} </Typography.Text>
                       <br />
                       {item.content}

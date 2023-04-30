@@ -10,13 +10,13 @@ function Home () {
   return (
     <>
       <SearchBar />
-      <Row>
-        <News />
-      </Row>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 4fr' }}>
         <MovieOfTheDay style={{ gridColumn: '1 / 2' }} />
         <Recommendation style={{ gridColumn: '2 / 3' }} />
       </div>
+      <Row>
+        <News />
+      </Row>
       <Row>
         <LatestMovies />
       </Row>
