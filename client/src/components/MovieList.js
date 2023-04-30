@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Pagination, Modal, Typography } from 'antd'
+import { Card, Pagination, Modal, Typography, Spin } from 'antd'
 import axios from 'axios'
 
 const config = require('../config.json')
@@ -11,9 +11,15 @@ const MovieList = ({ filters }) => {
   const [movies, setMovies] = useState([])
   const [totalMovies, setTotalMovies] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [moviesPerPage, setMoviesPerPage] = useState(20)
+  const [moviesPerPage, setMoviesPerPage] = useState(30)
   const [visible, setVisible] = useState(false)
+
   const [selectedMovie, setSelectedMovie] = useState(null)
+  const [selectedGenres, setSelectedGenres] = useState('')
+  const [selectedAwards, setSelectedAwards] = useState('')
+
+  const [selectedActors, setSelectedActors] = useState('')
+  const [selectedDirectors, setSelectedDirectors] = useState('')
 
   useEffect(() => {
     const offset = (currentPage - 1) * moviesPerPage
@@ -23,28 +29,48 @@ const MovieList = ({ filters }) => {
       offset: offset
     }
 
+    if (filters.searchValue) {
+      params.searchValue = filters.searchValue
+    }
+
     if (filters.genre) {
       params.genre = filters.genre
     }
 
-    if (filters.country) {
-      params.country = filters.country
+    if (filters.region) {
+      params.region = filters.region
     }
 
-    if (filters.runtime) {
-      params.runtime = filters.runtime
+    if (filters.runtimeMin) {
+      params.runtimeMin = filters.runtimeMin
     }
 
-    if (filters.rating) {
-      params.rating = filters.rating
+    if (filters.runtimeMax) {
+      params.runtimeMax = filters.runtimeMax
     }
 
-    if (filters.releaseYear) {
-      params.releaseYear = filters.releaseYear
+    if (filters.ratingMin) {
+      params.ratingMin = filters.ratingMin
+    }
+
+    if (filters.ratingMax) {
+      params.ratingMax = filters.ratingMax
+    }
+
+    if (filters.releaseYearMin) {
+      params.releaseYearMin = filters.releaseYearMin
+    }
+
+    if (filters.releaseYearMax) {
+      params.releaseYearMax = filters.releaseYearMax
     }
 
     if (filters.awarded) {
       params.awarded = filters.awarded
+    }
+
+    if (filters.nominated) {
+      params.nominated = filters.nominated
     }
 
     if (filters.rated) {
@@ -53,7 +79,6 @@ const MovieList = ({ filters }) => {
 
     axios.get(`http://${config.server_host}:${config.server_port}/allmovies`, { params })
       .then((response) => {
-        console.log(response.data.total)
         setMovies(response.data.movies)
         setTotalMovies(response.data.total)
       }).catch((error) => {
@@ -64,6 +89,69 @@ const MovieList = ({ filters }) => {
   useEffect(() => {
     setCurrentPage(1)
   }, [moviesPerPage, filters])
+
+  useEffect(() => {
+    setTotalMovies(-1)
+    setMovies([])
+  }, [filters])
+
+  useEffect(() => {
+
+    if (selectedMovie) {
+      const params = {
+        movie_id: selectedMovie.id
+      }
+
+      axios.get(`http://${config.server_host}:${config.server_port}/selectedgenres`, { params })
+        .then((response) => {
+          setSelectedGenres(response.data.genres)
+        }).catch((error) => {
+          console.log(error)
+        })
+
+      axios.get(`http://${config.server_host}:${config.server_port}/selectedawards`, { params })
+        .then((response) => {
+          if (response.data.length > 0) {
+            const uniqueAwardsByYear = response.data.reduce((acc, award) => {
+              const { year, category } = award
+              const existingCategories = acc[year] || new Set()
+              existingCategories.add(category)
+              acc[year] = existingCategories
+              return acc
+            }, {})
+
+            const result = Object.entries(uniqueAwardsByYear).map(([year, categories]) => ({
+              year: Number(year),
+              category: [...categories].join(" / ")
+            }))
+            setSelectedAwards(result)
+            console.log(result)
+          }
+          else {
+            setSelectedAwards('')
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+
+      axios.get(`http://${config.server_host}:${config.server_port}/selectedactors`, { params })
+        .then((response) => {
+          setSelectedActors(response.data)
+        }).catch((error) => {
+          console.log(error)
+        })
+
+      axios.get(`http://${config.server_host}:${config.server_port}/selecteddirectors`, { params })
+        .then((response) => {
+          console.log("hahahahhahhahaahahhahahhahahha")
+
+          console.log(response)
+          setSelectedDirectors(response.data)
+        }).catch((error) => {
+          console.log(error)
+        })
+    }
+  }, [selectedMovie])
 
   const handleMoviesPerPageChange = (currentPage, size) => {
     setCurrentPage(1)
@@ -86,94 +174,158 @@ const MovieList = ({ filters }) => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          marginBottom: 10,
-          border: '2px solid #ccc',
-          borderRadius: 5,
-          padding: 10,
-          backgroundImage: `url(${"https://wallpapercave.com/wp/wp4009237.jpg"})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        }}>
-        {movies.map((movie) => (
-          <Card
-            key={movie.id}
-            hoverable
-            style={{ width: 300, margin: '10px' }}
-            cover={<img alt="movie poster" src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
-            onClick={() => showModal(movie)}
-          >
-            <Meta title={movie.title} />
-            <br />
-            <p>
-              <strong>IMDB Rating:</strong> {movie.imdb_rating}
-            </p>
-            <p>
-              {movie.plot ? movie.plot.substring(0, 500) : 'No overview available'}
-            </p>
-          </Card>
-        ))}
-      </div>
-      <Pagination
-        current={currentPage}
-        pageSize={moviesPerPage}
-        pageSizeOptions={[10, 20, 50]}
-        total={totalMovies}
-        onChange={handlePageChange}
-        onShowSizeChange={handleMoviesPerPageChange}
-        style={{ marginTop: '20px', textAlign: 'center' }}
-      />
-      {selectedMovie && (
-        <Modal
-          visible={visible}
-          onCancel={handleCancel}
-          footer={null}
-          width={1500}
-        >
-          <Typography.Title level={2}>{selectedMovie.title}</Typography.Title>
-          <div style={{ display: 'flex', alignItems: 'center', padding: '20px', margin: '20px' }}>
-            <img
-              alt="movie poster"
-              src={selectedMovie.poster ? selectedMovie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='}
-              style={{ maxWidth: '100%' }}
-            />
-            <div style={{ marginLeft: '100px' }}>
-              <p>
-                {/* todo */}
-                <strong>Genre: </strong> TODO!!!!!!!!
-                <br />
-                <br />
-                <strong>Country: </strong> {selectedMovie.country}
-                <br />
-                <br />
-                <strong>Runtime: </strong> {selectedMovie.runtimeMinutes} min
-                <br />
-                <br />
-                <strong>Release Year: </strong> {selectedMovie.release_year}
-                <br />
-                <br />
-                <strong>IMDB Rating: </strong> {selectedMovie.imdb_rating} / 10.0
-                <br />
-                <br />
-                <strong>Oscar Info: </strong> TODO!!!!!!!!
-                <br />
-                <br />
-                <strong>Rated: </strong> {selectedMovie.rated ? selectedMovie.rated : '/'}
-              </p>
-            </div>
+      {totalMovies < 0 ? (
+        <Spin tip="Data on its way!" size="large" />
+      ) : (
+        <>
+          <div
+            style={{
+              marginBottom: 10,
+              border: '2px solid #ccc',
+              borderRadius: 5,
+              padding: 10,
+              backgroundImage: `url(${"https://wallpapercave.com/wp/wp4009237.jpg"})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundColor: 'rgba(0, 0, 0, 0.2)',
+            }}>
+            <Typography.Title level={4}>{totalMovies} movies found.</Typography.Title>
           </div>
+          {totalMovies > 0 &&
+            <>
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  marginBottom: 10,
+                  border: '2px solid #ccc',
+                  borderRadius: 5,
+                  padding: 10,
+                  backgroundImage: `url(${"https://wallpapercave.com/wp/wp4009237.jpg"})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                }}>
+                {movies.map((movie) => (
+                  <Card
+                    key={movie.id}
+                    hoverable
+                    style={{ width: 300, margin: '10px' }}
+                    cover={<img alt="movie poster" src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                    onClick={() => showModal(movie)}
+                  >
+                    <Meta title={movie.title} />
+                    <br />
+                    <p>
+                      <strong>IMDB Rating:</strong> {movie.imdb_rating}
+                    </p>
+                    <p>
+                      {movie.plot ? movie.plot.substring(0, 500) : 'No overview available'}
+                    </p>
+                  </Card>
+                ))}
+              </div>
 
-          <p>
-            <strong>Overview:</strong>
-            <br />
-            {selectedMovie.plot ? selectedMovie.plot : 'No overview available'}
-          </p>
-        </Modal>
-      )}
+              <Pagination
+                current={currentPage}
+                pageSize={moviesPerPage}
+                pageSizeOptions={[30, 60, 90]}
+                total={totalMovies}
+                onChange={handlePageChange}
+                onShowSizeChange={handleMoviesPerPageChange}
+                style={{ marginTop: '20px', textAlign: 'center' }}
+              />
+            </>
+          }
+          {selectedMovie && (
+            <Modal
+              visible={visible}
+              onCancel={handleCancel}
+              footer={null}
+              width={1500}
+            >
+              <Typography.Title level={2}>{selectedMovie.title}</Typography.Title>
+              <div style={{ display: 'flex', alignItems: 'center', padding: '20px', margin: '20px' }}>
+                <img
+                  alt="movie poster"
+                  src={selectedMovie.poster ? selectedMovie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='}
+                  style={{ maxWidth: '100%' }}
+                />
+                <div style={{ marginLeft: '100px' }}>
+                  <p>
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Genres:</Typography.Title> {selectedGenres}
+                    <br />
+                    <br />
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Region:</Typography.Title> {selectedMovie.region}
+                    <br />
+                    <br />
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Runtime:</Typography.Title> {selectedMovie.runtimeMinutes} min
+                    <br />
+                    <br />
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Release Year:</Typography.Title> {selectedMovie.release_year}
+                    <br />
+                    <br />
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>IMDB Rating:</Typography.Title> {selectedMovie.imdb_rating} / 10.0
+                    <br />
+                    <br />
+                    {selectedAwards && <>
+                      <Typography.Title level={5} style={{ display: "inline-block" }}>Award Information:</Typography.Title> In {selectedAwards[0].year}, this movie won {selectedAwards[0].category.split('/').length} Oscar Awards in {selectedAwards[0].category}
+                      <br />
+                      <br />
+                    </>
+                    }
+                    <Typography.Title level={5} style={{ display: "inline-block" }}>Rated:</Typography.Title> {selectedMovie.rated ? selectedMovie.rated : '/'}
+                  </p>
+                </div>
+              </div>
+              <p>
+                <Typography.Title level={4}>Overview:</Typography.Title>
+                {selectedMovie.plot ? selectedMovie.plot : 'No overview available'}
+              </p>
+              <br />
+              {selectedDirectors && (<>
+                <Typography.Title level={4}>Director{selectedDirectors.length > 1 ? 's' : ''}:</Typography.Title>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {selectedDirectors.map((director) => (
+                    <Card
+                      key={director.id}
+                      hoverable
+                      style={{ width: 300, margin: '10px' }}
+                      cover={<img alt={director.name} src={director.photo_url ? director.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                    >
+                      <Meta title={director.name} />
+                      <br />director
+                    </Card>
+                  ))}
+                </div>
+                <br />
+              </>
+              )}
+              {selectedActors && (<>
+                <Typography.Title level={4}>Actors and actresses:</Typography.Title>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {selectedActors.map((actor) => (
+                    <Card
+                      key={actor.id}
+                      hoverable
+                      style={{ width: 300, margin: '10px' }}
+                      cover={<img alt={actor.name} src={actor.photo_url ? actor.photo_url : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
+                    >
+                      <Meta title={actor.name} />
+                      <br />
+                      <p>
+                        <strong>Play the role of:</strong> {actor.character}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </>
+              )}
+            </Modal>
+          )}
+        </>
+      )
+      }
     </>
   )
 }

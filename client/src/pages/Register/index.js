@@ -31,8 +31,8 @@ function Register () {
     console.log(userInfo)
 
     try {
-      const response = await axios.get(`http://${config.server_host}:${config.server_port}/register`, { params: userInfo })
-      navigate('/login', { replace: true })
+      await axios.get(`http://${config.server_host}:${config.server_port}/register`, { params: userInfo })
+      navigate('/', { replace: true })
       message.success('Sign up success')
     } catch (error) {
       console.error(error)
@@ -100,34 +100,34 @@ function Register () {
                   placeholder="Select 3-5 favorite movie genres"
                   onChange={(value) => setFavoriteGenresValue(value)}
                 >
-                  <Option value="biography">Biography</Option>
-                  <Option value="film-noir">Film-Noir</Option>
-                  <Option value="adult">Adult</Option>
-                  <Option value="horror">Horror</Option>
-                  <Option value="mystery">Mystery</Option>
-                  <Option value="history">History</Option>
-                  <Option value="music">Music</Option>
-                  <Option value="documentary">Documentary</Option>
-                  <Option value="war">War</Option>
-                  <Option value="short">Short</Option>
-                  <Option value="crime">Crime</Option>
-                  <Option value="adventure">Adventure</Option>
-                  <Option value="family">Family</Option>
-                  <Option value="drama">Drama</Option>
-                  <Option value="romance">Romance</Option>
-                  <Option value="western">Western</Option>
                   <Option value="action">Action</Option>
-                  <Option value="sci-fi">Sci-Fi</Option>
-                  <Option value="fantasy">Fantasy</Option>
-                  <Option value="talk-show">Talk-Show</Option>
-                  <Option value="news">News</Option>
-                  <Option value="game-show">Game-Show</Option>
-                  <Option value="comedy">Comedy</Option>
-                  <Option value="sport">Sport</Option>
+                  <Option value="adult">Adult</Option>
+                  <Option value="adventure">Adventure</Option>
                   <Option value="animation">Animation</Option>
+                  <Option value="biography">Biography</Option>
+                  <Option value="comedy">Comedy</Option>
+                  <Option value="crime">Crime</Option>
+                  <Option value="documentary">Documentary</Option>
+                  <Option value="drama">Drama</Option>
+                  <Option value="family">Family</Option>
+                  <Option value="fantasy">Fantasy</Option>
+                  <Option value="film-noir">Film-Noir</Option>
+                  <Option value="game-show">Game-Show</Option>
+                  <Option value="history">History</Option>
+                  <Option value="horror">Horror</Option>
+                  <Option value="music">Music</Option>
                   <Option value="musical">Musical</Option>
-                  <Option value="thriller">Thriller</Option>
+                  <Option value="mystery">Mystery</Option>
+                  <Option value="news">News</Option>
                   <Option value="reality-tv">Reality-TV</Option>
+                  <Option value="romance">Romance</Option>
+                  <Option value="sci-fi">Sci-Fi</Option>
+                  <Option value="short">Short</Option>
+                  <Option value="sport">Sport</Option>
+                  <Option value="talk-show">Talk-Show</Option>
+                  <Option value="thriller">Thriller</Option>
+                  <Option value="war">War</Option>
+                  <Option value="western">Western</Option>
                 </Select>
               </Form.Item>
               <Form.Item>

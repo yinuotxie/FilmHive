@@ -23,12 +23,16 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => err && console.log(err))
 
+
+// utils
 const checkUserExists = async function (email) {
   const [rows] = await pool.query('SELECT email FROM Users WHERE email = ?', [email])
   return rows.length > 0
 }
 
 // routes
+
+
 // register
 const register = async function (req, res) {
 
@@ -61,6 +65,7 @@ const register = async function (req, res) {
   }
 }
 
+
 // login
 const login = async function (req, res) {
 
@@ -80,84 +85,91 @@ const login = async function (req, res) {
   })
 }
 
-// all movies
+
+// movie filter
 const allMovies = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
   const offset = parseInt(req.query.offset || 0)
-  // const genre = req.query.genre || ''
-  const country = req.query.country || ''
-  const runtime = parseInt(req.query.runtime || 0)
-  const rating = parseFloat(req.query.rating || 0)
-  const releaseYear = parseInt(req.query.releaseYear || 0)
-  // const awarded = req.query.awarded === 'true'
+  const searchValue = req.query.searchValue || ''
+  const genre = req.query.genre || ''
+  const region = req.query.region || ''
+  const runtimeMin = parseInt(req.query.runtimeMin) || 0
+  const runtimeMax = parseInt(req.query.runtimeMax) || 51421
+  const ratingMin = parseFloat(req.query.ratingMin) || 0
+  const ratingMax = parseFloat(req.query.ratingMax) || 10
+  const releaseYearMin = parseInt(req.query.releaseYearMin) || 1900
+  const releaseYearMax = parseInt(req.query.releaseYearMax) || 2025
+  const awarded = req.query.awarded === 'true' ? 1 : 0
+  const nominated = req.query.nominated === 'true' ? 1 : 0
   const rated = req.query.rated === 'true'
 
   try {
-    // total numbers of target movies
-    let query_total = 'SELECT COUNT(*) as total FROM Movies'
-    let queryParams_total = []
-
-    // target movies
-    let query_movies = 'SELECT * FROM Movies'
-    let queryParams_movies = []
-
-    if (country || runtime || rating || releaseYear || rated) {
-
-      query_total = 'SELECT COUNT(*) as total FROM Movies WHERE '
-      query_movies = 'SELECT * FROM Movies WHERE '
-      let conditions = []
-
-      // if (genre) {
-      //   conditions.push(`genre LIKE ?`)
-      //   queryParams_total.push(`%${genre}%`)
-      //   queryParams_movies.push(`%${genre}%`)
-      // }
-      if (country) {
-        conditions.push(`country LIKE ?`)
-        queryParams_total.push(`%${country}%`)
-        queryParams_movies.push(`%${country}%`)
-      }
-      if (runtime) {
-        conditions.push(`runtimeMinutes <= ?`)
-        queryParams_total.push(runtime)
-        queryParams_movies.push(runtime)
-      }
-      if (rating) {
-        conditions.push(`imdb_rating >= ?`)
-        queryParams_total.push(rating)
-        queryParams_movies.push(rating)
-      }
-      if (releaseYear) {
-        conditions.push(`release_year >= ?`)
-        queryParams_total.push(releaseYear)
-        queryParams_movies.push(releaseYear)
-      }
-      // if (awarded) {
-      //   conditions.push(`awards IS NOT NULL`)
-      // }
-      if (rated) {
-        conditions.push(`rated IS NOT NULL AND rated != 'Unrated' AND rated != 'Not rated'`)
-      }
-      query_total += conditions.join(' AND ')
-      query_movies += conditions.join(' AND ')
+    let query = `
+    SELECT DISTINCT Movies.id, Movies.region, Movies.release_year, Movies.runtimeMinutes, Movies.title, Movies.imdb_rating, Movies.plot, Movies.poster
+    FROM Movies 
+         JOIN MovieGenres ON Movies.id = MovieGenres.movie_id
+         JOIN Genres ON MovieGenres.genre_id = Genres.id
+  `
+    if (awarded || nominated) {
+      query += ` JOIN OscarAwards ON Movies.id = OscarAwards.movie_id`
     }
 
-    query_movies += ' LIMIT ? OFFSET ?'
-    queryParams_movies.push(limit, offset)
+    query += ` WHERE imdb_rating >= ? AND imdb_rating <= ?
+    AND release_year >= ? AND release_year <= ?
+    AND runtimeMinutes >= ? AND runtimeMinutes <= ?`
 
-    const [results] = await pool.query(query_total, queryParams_total)
-    const total = results[0].total
+    const params = [ratingMin, ratingMax, releaseYearMin, releaseYearMax, runtimeMin, runtimeMax]
 
-    const [rows] = await pool.query(query_movies, queryParams_movies)
-    res.status(200).json({ movies: rows, total: total })
+    if (searchValue) {
+      query += ` AND Movies.title LIKE ?`
+      params.push(`%${searchValue}%`)
+    }
+
+    if (genre) {
+      query += ` AND Genres.name = ?`
+      params.push(genre)
+    }
+
+    if (region) {
+      query += ` AND region = ?`
+      params.push(region)
+    }
+
+    if (awarded) {
+      query += ` AND is_winner >= 1`
+    }
+
+    if (nominated) {
+      query += ` AND is_winner >= 0`
+    }
+
+    if (rated) {
+      query += ` AND rated IS NOT NULL AND rated != 'Unrated' AND rated != 'Not rated'`
+    }
+
+    let total = 0
+    if (searchValue || genre || region || runtimeMin || runtimeMax !== 51421 || ratingMin || ratingMax !== 10 || awarded || nominated || rated || releaseYearMin !== 1900 || releaseYearMax !== 2025) {
+      const [temp] = await pool.query(query, params)
+      total = temp.length
+    } else {
+      total = 108898
+    }
+
+    query += ' LIMIT ? OFFSET ?'
+    params.push(limit, offset)
+
+    const [results] = await pool.query(query, params)
+
+    res.status(200).json({ movies: results, total: total })
   } catch (err) {
     console.log(err)
     res.status(500).send('Error retrieving movies from database')
   }
 }
 
-// all actors
+
+// actor filter
 const allActors = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
@@ -174,7 +186,8 @@ const allActors = async function (req, res) {
   }
 }
 
-// all directors
+
+// director filter
 const allDirectors = async function (req, res) {
 
   const limit = parseInt(req.query.limit || 20)
@@ -191,7 +204,8 @@ const allDirectors = async function (req, res) {
   }
 }
 
-// home page search
+
+// search in home page
 const homeSearch = async function (req, res) {
 
   const searchValue = req.query.searchValue || ''
@@ -288,6 +302,7 @@ const multifacedDirector = async function (req, res) {
   }
 }
 
+
 // movir of the day
 const movieOfTheDay = async function (req, res) {
   try {
@@ -306,7 +321,6 @@ const movieOfTheDay = async function (req, res) {
 }
 
 // recommendations
-
 const recommendations = async function (req, res) {
 
   const user_email = req.query.email || "yzphilly@outlook.com"
@@ -332,7 +346,7 @@ const recommendations = async function (req, res) {
            JOIN AVG_GENRE_RATING AGR on MP.genre_id = AGR.genre_id
       WHERE imdb_rating > AGR.avg_rating
       ORDER BY RAND()
-      LIMIT 10;
+      LIMIT 14;
     `
     const [rows] = await pool.query(query, [user_email])
     res.status(200).json({ movies: rows })
@@ -341,6 +355,99 @@ const recommendations = async function (req, res) {
     res.sendStatus(500)
   }
 }
+
+
+// selected movie's genres
+const selectedGenres = async function (req, res) {
+
+  const movie_id = req.query.movie_id
+
+  try {
+    let query = `
+      SELECT g.name
+      FROM Genres g JOIN MovieGenres mg ON g.id = mg.genre_id
+      WHERE mg.movie_id = ?
+    `
+    const results = await pool.query(query, [movie_id])
+
+    const genres = results[0].map(genre => genre.name).join(' / ')
+
+    res.status(200).json({ genres })
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// selected movie's genres
+const selectedAwards = async function (req, res) {
+
+  const movie_id = req.query.movie_id
+
+  try {
+    let query = `
+      SELECT *
+      FROM OscarAwards
+      WHERE movie_id = ?
+    `
+    const results = await pool.query(query, [movie_id])
+    // console.log(results[0])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// selected movie's actors
+const selectedActors = async function (req, res) {
+
+  const movie_id = req.query.movie_id
+
+  try {
+    let query = `
+      SELECT ActIn.character, Crews.id, Crews.name, Crews.photo_url
+      FROM ActIn JOIN Crews ON ActIn.crew_id = Crews.id
+      WHERE ActIn.movie_id = ?;
+    `
+    const results = await pool.query(query, [movie_id])
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
+
+// selected movie's actors
+const selectedDirectors = async function (req, res) {
+
+  const movie_id = req.query.movie_id
+
+  try {
+    let query = `
+      SELECT Crews.id, Crews.name, Crews.photo_url
+      FROM Direct JOIN Crews ON Direct.crew_id = Crews.id
+      WHERE Direct.movie_id = ?;
+    `
+    const results = await pool.query(query, [movie_id])
+    console.log('results[0]')
+
+    console.log(results[0])
+
+    res.json(results[0])
+
+  } catch (err) {
+    console.error(err.message)
+    res.status(500).json({ error: 'Server error' })
+  }
+}
+
 
 module.exports = {
   register,
@@ -351,5 +458,9 @@ module.exports = {
   homeSearch,
   multifacedDirector,
   movieOfTheDay,
-  recommendations
+  recommendations,
+  selectedGenres,
+  selectedAwards,
+  selectedActors,
+  selectedDirectors
 }

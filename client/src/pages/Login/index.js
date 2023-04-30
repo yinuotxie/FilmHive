@@ -29,7 +29,7 @@ function Login () {
       // console.log(response.data[0][0])
       const token = response.data[0]
       loginStore.setToken(token)
-      navigate('/', { replace: true })
+      navigate('/home', { replace: true })
       message.success('Login success')
     }).catch((error) => {
       console.log(error)

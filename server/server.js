@@ -17,7 +17,10 @@ app.get("/homesearch", routes.homeSearch)
 app.get("/multifaceddirector", routes.multifacedDirector)
 app.get("/movieoftheday", routes.movieOfTheDay)
 app.get("/recommendations", routes.recommendations)
-
+app.get("/selectedgenres", routes.selectedGenres)
+app.get("/selectedawards", routes.selectedAwards)
+app.get("/selectedactors", routes.selectedActors)
+app.get("/selecteddirectors", routes.selectedDirectors)
 
 app.listen(config.server_port, () => {
   console.log(`Server running at http://${config.server_host}:${config.server_port}/`)

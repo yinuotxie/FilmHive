@@ -20,7 +20,7 @@ const MainLayout = () => {
   const { pathname } = useLocation()
 
   const handleLogoutConfirm = () => {
-    window.location.href = '/login'
+    window.location.href = '/'
   }
 
   return (
@@ -46,7 +46,7 @@ const MainLayout = () => {
             style={{ height: '100%', borderRight: 0 }}
           >
             <Menu.Item icon={<HomeOutlined />} key="/">
-              <Link to='/'>Home</Link>
+              <Link to='/home'>Home</Link>
             </Menu.Item>
             <Menu.Item icon={<PlaySquareOutlined />} key="/movie">
               <Link to="/movie">Movie</Link>
