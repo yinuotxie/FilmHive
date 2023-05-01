@@ -2,6 +2,12 @@
 
 FilmHive is a movie website designed for movie enthusiasts to discover, explore, and discuss films from all around the world. The website aims to provide a comprehensive, engaging, and user-friendly platform where users can find reliable information, personalized recommendations, and a vibrant community of fellow movie lovers.
 
+## Built with
+
+- React
+- Node.js
+- MySQL/AWS
+
 ## Features
 
 - Homepage: Provides user information, movie of the day, recommendations, latest news and popular movies.
@@ -11,6 +17,8 @@ FilmHive is a movie website designed for movie enthusiasts to discover, explore,
 - Fun facts page: Displays some fun facts in modern movie history
 
 ## Dependencies
+
+Please check client/package.json and server/package.json for dependencies.
 
 ## Run FilmHive in your local environment
 
