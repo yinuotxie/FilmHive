@@ -60,7 +60,6 @@ const ActorList = ({ filters }) => {
 
     axios.get(`http://${config.server_host}:${config.server_port}/allactors`, { params })
       .then((response) => {
-        // console.log(response.data)
         setActors(response.data.actors)
         setTotalActors(response.data.total)
       }).catch((error) => {

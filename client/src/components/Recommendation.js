@@ -36,7 +36,7 @@ const Reccomendation = () => {
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
 
-      <Typography.Title level={2}>Recommended just for you!</Typography.Title>
+      <Typography.Title level={3}>Recommended just for you!</Typography.Title>
       <Typography.Title level={4}>We selected 10 movies base on your preferences, and their ratings are all higher than the average ratings in each genre. Enjoy!</Typography.Title>
       <br />
       {movies.length === 0 ? (
@@ -63,7 +63,5 @@ const Reccomendation = () => {
     </div >
   )
 }
-
-// todo: hyperlink
 
 export default Reccomendation

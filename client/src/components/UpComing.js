@@ -24,11 +24,11 @@ const UpComing = () => {
     fetchUpComings()
   }, [])
 
-  // const filteredUpComings = upComings.filter((item) => {
-  //   const releaseDate = new Date(item.release_date)
-  //   const today = new Date()
-  //   return releaseDate >= today
-  // })
+  const filteredUpComings = upComings.filter((item) => {
+    const releaseDate = new Date(item.release_date)
+    const today = new Date()
+    return releaseDate >= today
+  })
 
   return (
     <div style={{
@@ -42,9 +42,9 @@ const UpComing = () => {
       backgroundPosition: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
-      <Typography.Title level={2}>Up coming movies</Typography.Title>
+      <Typography.Title level={3}>Up coming movies</Typography.Title>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {upComings.slice(0, 14).map((item) => (
+        {filteredUpComings.slice(0, 14).map((item) => (
           <Card
             key={item.id}
             hoverable

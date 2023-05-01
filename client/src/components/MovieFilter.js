@@ -111,6 +111,7 @@ const MovieFilter = ({ onFiltersChange }) => {
             onChange={handleGenreChange}
             style={{ width: '20%', marginRight: 50, marginLeft: 150 }}
           >
+            <Option value=""></Option>
             <Option value="action">Action</Option>
             <Option value="adult">Adult</Option>
             <Option value="adventure">Adventure</Option>
@@ -145,6 +146,7 @@ const MovieFilter = ({ onFiltersChange }) => {
             onChange={handleRegionChange}
             style={{ marginRight: 70, width: '20%' }}
           >
+            <Option value=""></Option>
             <Option value="Afghanistan">Afghanistan</Option>
             <Option value="Albania">Albania</Option>
             <Option value="Algeria">Algeria</Option>

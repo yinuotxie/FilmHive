@@ -35,13 +35,15 @@ const SearchBar = () => {
     }
 
     axios.get(`http://${config.server_host}:${config.server_port}/homesearch`, { params })
+
       .then(async (response) => {
-        console.log(response.data)
+
         const movies1 = []
         const movies2 = []
         const movies3 = []
         const actors = []
         const directors = []
+
         response.data.searchResults.forEach(result => {
           if (result.type === 'movie1') {
             movies1.push(result)
@@ -56,7 +58,6 @@ const SearchBar = () => {
           }
         })
 
-        console.log(response)
         setMovies(movies1)
         setMoviesActIn(movies2)
         setMoviesCharacters(movies3)

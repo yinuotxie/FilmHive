@@ -11,7 +11,6 @@ class LoginStore {
   }
 
   setToken = (token) => {
-    console.log(token)
     this.token = token
   }
 }

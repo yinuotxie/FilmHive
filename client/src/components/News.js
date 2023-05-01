@@ -31,7 +31,7 @@ const News = () => {
       backgroundPosition: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
-      <Typography.Title level={2}>Latest news</Typography.Title>
+      <Typography.Title level={3}>Latest news</Typography.Title>
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {news.map((item) => (
           <Card

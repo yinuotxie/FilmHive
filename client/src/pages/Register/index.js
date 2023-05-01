@@ -28,8 +28,6 @@ function Register () {
       favoriteGenres: values.favoriteGenres
     }
 
-    console.log(userInfo)
-
     try {
       await axios.get(`http://${config.server_host}:${config.server_port}/register`, { params: userInfo })
       navigate('/', { replace: true })

@@ -8,9 +8,6 @@ const { Meta } = Card
 
 const DirectorList = ({ filters }) => {
 
-  console.log(filters)
-
-
   const [directors, setDirectors] = useState([])
   const [totalDirectors, setTotalDirectors] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
@@ -63,7 +60,6 @@ const DirectorList = ({ filters }) => {
 
     axios.get(`http://${config.server_host}:${config.server_port}/alldirectors`, { params })
       .then((response) => {
-        // console.log(response.data.total)
         setDirectors(response.data.directors)
         setTotalDirectors(response.data.total)
       }).catch((error) => {

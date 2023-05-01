@@ -25,8 +25,6 @@ function Login () {
         password: values.password,
       },
     }).then((response) => {
-      // console.log('test successful!!!')
-      // console.log(response.data[0][0])
       const token = response.data[0]
       loginStore.setToken(token)
       navigate('/home', { replace: true })
@@ -40,10 +38,6 @@ function Login () {
   const handleRegister = () => {
     window.location.href = '/register'
   }
-
-  // function onFinishFailed (errorInfo) {
-  //   console.log(errorInfo)
-  // }
 
   return (
     <>

@@ -29,7 +29,7 @@ const MultifacedDirector = () => {
       backgroundPosition: 'center',
       backgroundColor: 'rgba(0, 0, 0, 0.2)',
     }}>
-      <Typography.Title level={2}>Top 10 Versatile Directors</Typography.Title>
+      <Typography.Title level={3}>Top 10 Versatile Directors</Typography.Title>
       {directors.length === 0 ? (
         <Spin tip="Data on its way!" size="large" />
       ) : (
@@ -54,7 +54,5 @@ const MultifacedDirector = () => {
     </div >
   )
 }
-
-// todo: hyperlink
 
 export default MultifacedDirector
