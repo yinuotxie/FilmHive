@@ -21,6 +21,8 @@ const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("")
   const [modalVisible, setModalVisible] = useState(false)
   const [showReminder, setShowReminder] = useState(false)
+  const [showAlert, setShowAlert] = useState(false)
+
 
   const handleSearchValueChange = (e) => {
     setSearchValue(e.target.value)
@@ -28,11 +30,18 @@ const SearchBar = () => {
 
   const handleConfirmClick = () => {
 
-    setShowReminder(true)
+    setShowAlert(false)
 
     const params = {
       searchValue: searchValue
     }
+
+    if (!searchValue) {
+      setShowAlert(true)
+      return
+    }
+
+    setShowReminder(true)
 
     axios.get(`http://${config.server_host}:${config.server_port}/homesearch`, { params })
 
@@ -103,18 +112,28 @@ const SearchBar = () => {
       <Button type="primary" onClick={handleConfirmClick}>
         Search
       </Button>
+      {showAlert && (
+        <>
+          <br />
+          <br />
+          <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+            <Alert message="Please input something!" type="error" style={{ width: '400px' }} showIcon />
+          </div>
+        </>
+      )}
       {showReminder && (
         <>
           <br />
           <br />
-          <Alert
-            message="Searching!"
-            description="Data on its way, please wait..."
-            type="success"
-          />
+          <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center' }}>
+            <Alert
+              message="Searching!"
+              description="Data on its way, please wait..."
+              type="success"
+            />
+          </div>
         </>
-      )
-      }
+      )}
       <Modal
         visible={modalVisible}
         onCancel={handleCancel}

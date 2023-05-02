@@ -26,12 +26,16 @@ function Login () {
       },
     }).then((response) => {
       const token = response.data[0]
-      loginStore.setToken(token)
-      navigate('/home', { replace: true })
-      message.success('Login success')
+      if (token.password === values.password) {
+        loginStore.setToken(token)
+        navigate('/home', { replace: true })
+        message.success('Login success')
+      } else {
+        message.error('Wrong password')
+      }
     }).catch((error) => {
       console.log(error)
-      message.error('Invalid email or password')
+      message.error('Invalid email')
     })
   }
 
