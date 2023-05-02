@@ -24,10 +24,6 @@ Please check client/package.json and server/package.json for dependencies.
 
 Clone to local: git clone https://github.com/yinuotxie/FilmHive.git
 
-Find client directory: cd FilmHive/client
-Install packages: npm install
-Start client: npm start
+Find client directory: cd FilmHive/client | Install packages: npm install | Start client: npm start
 
-Find client directory: cd FilmHive/server
-Install packages: npm install
-Start server: npm start
+Find client directory: cd FilmHive/server | Install packages: npm install | Start server: npm start
