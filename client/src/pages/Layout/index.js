@@ -66,6 +66,9 @@ const MainLayout = () => {
           <Outlet />
         </Layout>
       </Layout>
+      <div style={{ textAlign: 'center', margin: '3px' }}>
+        If you have any questions, please contact yinhaoz@seas.upenn.edu / pxinyi@seas.upenn.edu / yinuoxie@seas.upenn.edu / xiling@seas.upenn.edu.
+      </div>
     </Layout>
   )
 }

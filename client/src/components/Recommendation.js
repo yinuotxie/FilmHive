@@ -50,10 +50,10 @@ const Reccomendation = () => {
                   hoverable
                   cover={<img alt={movie.title} src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
                 >
-                  <Card.Meta title={movie.title} />
-                  <br />
-                  <p>Rating:{movie.imdb_rating}</p>
-                  <p>{movie.plot ? movie.plot.substring(0, 100) : 'No overview available'}</p>
+                  <Card.Meta
+                    title={movie.title}
+                    description={movie.plot ? movie.plot.substring(0, 200) : 'No overview available'}
+                  />
                 </Card>
               </Col>
             ))}

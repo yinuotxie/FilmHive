@@ -291,7 +291,7 @@ const DirectorList = ({ filters }) => {
               </>
               )}
               {selectedDuo && (<>
-                <Typography.Title level={4}>He/She's golden partners:</Typography.Title>
+                <Typography.Title level={4}>His/Her golden partners:</Typography.Title>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                   {selectedDuo.map((crew) => (
                     <Card

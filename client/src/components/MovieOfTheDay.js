@@ -23,10 +23,12 @@ const MovieOfTheDay = () => {
         cover={<img alt={movie.title} src={movie.poster ? movie.poster : 'https://media.istockphoto.com/id/1193046540/vector/photo-coming-soon-image-icon-vector-illustration-isolated-on-white-background-no-website.jpg?s=612x612&w=0&k=20&c=4wx1UzigP0g9vJv9D_DmOxdAT_DtX5peZdoS4hi2Fqg='} />}
         style={{ width: 400 }}
       >
-        <Card.Meta title={movie.title} />
+        <Card.Meta
+          title={movie.title}
+          description={movie.plot ? movie.plot.substring(0, 500) : 'No overview available'}
+        />
         <br />
-        <p>Rating:{movie.imdb_rating}</p>
-        <p>{movie.plot}</p>
+        <p><strong>Rating:</strong> {movie.imdb_rating}</p>
       </Card>
     </div>
   )
